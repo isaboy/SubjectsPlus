@@ -196,7 +196,7 @@ class Autocomplete {
                 break;
 
             case "records":
-                $statement = $connection->prepare("SELECT DISTINCT title.title_id as 'id','Record' as 'content_type', title.title as 'label', location.location as 'location_url'
+                $statement = $connection->prepare("SELECT DISTINCT title.title_id as `id`,'Record' as `content_type`, title.title as `label`, title.pre as `prefix`, location.location as `location_url`
 FROM title
 INNER JOIN location_title
 ON title.title_id = location_title.title_id
@@ -208,7 +208,7 @@ AND title.title LIKE :search_term");
 
 
             case "azrecords":
-                $statement = $connection->prepare("SELECT DISTINCT title.title_id as 'id','Record' as 'content_type', title.title as 'label', location.location as 'location_url'
+                $statement = $connection->prepare("SELECT DISTINCT title.title_id as 'id','Record' as 'content_type', title.title as 'label', title.pre as 'prefix', location.location as 'location_url'
 FROM title
 INNER JOIN location_title 
 ON title.title_id = location_title.title_id
@@ -329,6 +329,7 @@ AND title.title LIKE :search_term");
 
                     case "Record":
                         $arr[$i]['label'] = html_entity_decode($myrow['label']);
+                        $arr[$i]['prefix'] = html_entity_decode($myrow['prefix']);
 
                         if ($this->getSearchPage() == "control") {
                             $arr[$i]['url'] = 'record.php?record_id=' . $myrow['id'];
