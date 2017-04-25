@@ -8,29 +8,68 @@ if (file_exists("config.php")) {
 	include_once("config.php");
 }
 
-global $i_frame_settings;
-$user_agent = $_SERVER['HTTP_USER_AGENT'];
+function setFrameSettings()
+{
+    global $i_frame_settings;
+    $setting = $i_frame_settings;
+    $user_agent = $_SERVER['HTTP_USER_AGENT'];
+    $is_ie = false;
 
-if (empty($i_frame_settings)){
-    if(stripos($user_agent,"Chrome")!==false || stripos( $user_agent, 'Safari') !== false){
-        $i_frame_settings = " 'self'";
-    }else{
-        $i_frame_settings = 'SAMEORIGIN';
+    if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'Trident') !== false)) {
+        $is_ie = true;
     }
-}
 
-if(stripos($user_agent,"Chrome")!==false || stripos( $user_agent, 'Safari') !== false){
-    if (strpos($i_frame_settings, 'ALLOW-FROM') !== false) {
-        $temp = explode("ALLOW-FROM", $i_frame_settings);
-        $trusted_site_url = $temp[1];
-    }elseif (strpos($i_frame_settings, 'SAMEORIGIN') !== false){
-        $trusted_site_url = " 'self'";
-    }else{
-        $trusted_site_url = " 'none'";
+    if (empty($setting)) {
+        var_dump($setting);
+        if (stripos($user_agent, "Chrome") !== false || stripos($user_agent, 'Safari') !== false) {
+            $setting = " self";
+        } else {
+            $setting = 'SAMEORIGIN';
+        }
     }
-    @header( 'Content-Security-Policy: frame-ancestors' . $trusted_site_url);
-}else{
-    @header( 'X-Frame-Options: ' . $i_frame_settings);
+
+    if (stripos($setting, "self") !== false) {
+        $setting = str_replace("self", "'self'", $setting);
+    }
+
+    if (strpos($setting, 'ALLOW-FROM') !== false) {
+        if (!$is_ie) {
+            $temp = explode("ALLOW-FROM", $setting);
+            $trusted_site_url = $temp[1];
+        }else{
+            $trusted_site_url = $setting;
+        }
+    } elseif (strpos($setting, 'SAMEORIGIN') !== false) {
+        if (!$is_ie){
+            $trusted_site_url = " 'self'";
+        }else{
+            $trusted_site_url = $setting;
+        }
+    } else {
+        if (!$is_ie) {
+            $trusted_site_url = " 'none'";
+        }else{
+            $trusted_site_url = " DENY";
+        }
+    }
+
+    if ($is_ie) {
+        $request_host = $_SERVER['HTTP_HOST'];
+        $protocol = 'http://';
+        if ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || $_SERVER['SERVER_PORT'] == 443) {
+            $protocol = 'https://';
+        }
+        if (strpos($trusted_site_url, $request_host) !== false && strpos($setting, 'ALLOW-FROM') !== false) {
+            $trusted_site_url = 'ALLOW-FROM '.$protocol.$request_host;
+        }
+
+        if (strpos($trusted_site_url, 'self') !== false) {
+            $trusted_site_url = 'SAMEORIGIN';
+        }
+        @header('X-Frame-Options: ' . $trusted_site_url);
+    } else {
+        @header('Content-Security-Policy: frame-ancestors' . $trusted_site_url);
+    }
 }
 
 //////////////////////////////
