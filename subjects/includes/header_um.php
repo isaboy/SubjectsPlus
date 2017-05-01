@@ -16,8 +16,7 @@
 
 
 
-<?php 
-
+<?php
 // Turn off https with a redirect on front end pages 
 
 /*
@@ -473,6 +472,11 @@ if( (isset($google_analytics_ua)) && (( !empty($google_analytics_ua))) ) {
     <div class="pure-g">
         <div class="pure-u-1">
           <h1><?php print $page_title; ?></h1>
+          <?php
+            if (true){//TODO ?>
+            <button class="fa fa-star-o fa-3 umlibrary-favorite-button"></button>
+          <?php  }
+          ?>
         </div>
     </div>
 

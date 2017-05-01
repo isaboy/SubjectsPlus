@@ -325,7 +325,7 @@ include("includes/footer.php");
           $(".zebra").removeClass("oddrow");
       }
 
-      <?php include('../assets/js/guides/favoriteDatabases.js'); ?>
+      <?php include('../assets/js/guides/favoritelinks.js'); ?>
       var fdl = favoriteDatabasesList();
       fdl.init();
   })

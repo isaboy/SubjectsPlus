@@ -430,16 +430,19 @@ ORDER BY newtitle
     </tr>";
 		$onerow = "<tr class=\"zebra $row_colour\" valign=\"top\">
       <td style=\"width: 120px\">$information1 <span class=\"db_icons\">$icons</span></td><td><a href=\"$url\" $target>$item_title</a>  $helpguide $display_note_text
-        <div class=\"list_bonus\">$bonus</div>
-        <div class=\"favorite_button\">".self::generateFavoriteButton()."</div>
-      </td>
-    </tr>";
+        <div class=\"list_bonus\">$bonus</div>";
+
+        if (true){ //TODO
+            $onerow = $onerow . " <div class=\"favorite_button\">".self::generateFavoriteButton()."</div>";
+        }
+
+       $onerow = $onerow ."</td></tr>";
 
         return $onerow;
     }
 
     function generateFavoriteButton(){
-        $result = "<i class=\"fa fa-star-o fa-1 favorite-database-icon\" alt=\"" . _("Make favorite") . "\" title=\"" . _("Make favorite") . "\"></i>";
+        $result = "<button class=\"fa fa-star-o fa-1 favorite-database-icon\" alt=\"" . _("Make favorite") . "\" title=\"" . _("Make favorite") . "\"></button>";
 
         return $result;
     }
