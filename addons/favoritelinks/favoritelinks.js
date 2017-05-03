@@ -162,19 +162,6 @@ function favoriteDatabasesList() {
             searchBar.type = "text";
             searchBar.id = "favoriteLinksSearchBar";
             searchBar.placeholder = "Search for quick links";
-
-            searchBar.onkeydown = function(event){
-                if(event.shiftKey && event.keyCode == 9) {
-                    var divFilesFromGoogleDrive =  document.querySelector('#favorite-links-files-from-google-drive');
-                    if (umlibrary_favorite_links.divIsVisible(divFilesFromGoogleDrive)){
-                        alert('Google Files');
-                        return;
-                    }else {
-                        document.querySelector('#favorite-links-modal-close-button').focus();
-                    }
-                }
-            };
-
             searchBar.style.display = 'none';
 
             var searchBarDiv = document.createElement('div');
@@ -363,10 +350,6 @@ function favoriteDatabasesList() {
             umlibrary_favorite_links.myFavoriteLinksButtonBehavior();
             umlibrary_favorite_links.saveToGoogleDriveButtonBehavior();
             umlibrary_favorite_links.loadFromGoogleDriveButtonBehavior();
-
-            $('.umlibrarysurvey-favorites-actions').click(function(event){
-                event.preventDefault();
-            });
         },
         filterTagBehavior: function () {
             $(".umlibrary-favorite-links-filter-tag-checkbox").click(function () {
@@ -376,7 +359,7 @@ function favoriteDatabasesList() {
                 if (filterTag) {
                     $('ul#favoriteLinksModalWindowList li:not(li[filtertag=' + filterTag + '])').hide();
                     $('ul#favoriteLinksModalWindowList li[filtertag=' + filterTag + ']').show();
-                }else{
+                } else {
                     $('ul#favoriteLinksModalWindowList li[filtertag]').show();
                 }
             })
@@ -384,9 +367,8 @@ function favoriteDatabasesList() {
         createDefaultListOfLinks: function () {
             if ($.isEmptyObject(localStorage.umLibraryFavorites)) {
                 localStorage.umLibraryFavorites = "[]";
-                var defaultLinks =  config.defaultLinks;
-                for (var key in defaultLinks) {
-                    var link = defaultLinks[key];
+                for (var i = 0; i < defaultLinks.length; i++){
+                    var link = defaultLinks[i];
                     umlibrary_favorite_links.saveFavoritesToLocalStorage(link.linkName, link.urlLink, link.tag);
                 }
                 umlibrary_favorite_links.propagateFavorites();
@@ -561,14 +543,15 @@ function favoriteDatabasesList() {
             }
         },
         importFavorites: function () {
-            $("#umlibrary_favorite_links_load_favorites_button").click(function () {
+            $("#umlibrary_favorite_links_load_favorites_button").click(function (event) {
+                    event.preventDefault();
                     $('#favoritesListInput').trigger('click');
                 }
             );
         },
         favoritesListInput: function () {
             $("#favoritesListInput").change(function (event) {
-                    var files = event.target.files;
+                var files = event.target.files;
                     var reader = new FileReader();
                     reader.onload = function (e) {
                         try {
@@ -586,9 +569,9 @@ function favoriteDatabasesList() {
             try {
                 for (var i = 0, len = favorites.length; i < len; i++) {
                     var objectLength = Object.keys(favorites[i]).length;
-                    if (objectLength != 2) {
+                    if (objectLength != 3) {
                         throw 'error';
-                    } else if (!('linkName' in favorites[i]) && !('urlLink' in favorites[i])) {
+                    } else if (!('linkName' in favorites[i]) && !('urlLink' in favorites[i]) && !('tag' in favorites[i])) {
                         throw 'error';
                     }
                 }
@@ -597,14 +580,19 @@ function favoriteDatabasesList() {
             } catch (e) {
                 alert('The favorites list file is either corrupted or wrong!');
             }
-
         },
         myFavoriteLinksButtonBehavior: function () {
             $("#umlibrary_favorite_links_button").click(function (event) {
+                $(window).on({
+                    'scroll mousewheel touchmove': function(e) {
+                        if (e.target.id == 'el') return;
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                });
                 umlibrary_favorite_links.fillLinksList();
                 var modal = document.getElementById("favorite-links-modal-window");
                 modal.style.display = "block";
-
                 var favorites = JSON.parse(localStorage.umLibraryFavorites);
                 if (favorites.length > minimumItemsCountForSearchBar) {
                     document.querySelector('#favoriteLinksSearchBar').style.display= 'block';
@@ -612,9 +600,9 @@ function favoriteDatabasesList() {
                 }else{
                     document.querySelector('#favorite-links-modal-window').focus();
                 }
-
-                console.log(document.activeElement);
+                umlibrary_favorite_links.setFocusableElementsBehavior("favorite-links-modal-window");
             });
+
         },
         loadFromGoogleDriveButtonBehavior: function () {
             $("#umlibrary_favorite_links_load_from_drive_button").click(function (event) {
@@ -782,20 +770,37 @@ function favoriteDatabasesList() {
 
             $(close).click(function (event) {
                 $(parentToClose).hide();
+                $(window).off('scroll mousewheel touchmove');
             });
             close.appendChild(document.createTextNode("x"));
-            // close.onkeydown = function(event){
-            //     if(event.keyCode == 9) {
-            //         var divFilesFromGoogleDrive =  document.querySelector('#favorite-links-files-from-google-drive');
-            //         if (umlibrary_favorite_links.divIsVisible(divFilesFromGoogleDrive)){
-            //             alert('Google Files');
-            //             return;
-            //         }else {
-            //             document.querySelector('#favoriteLinksSearchBar').focus();
-            //         }
-            //     }
-            // };
             return close;
+        },
+        setFocusableElementsBehavior: function (currentModal) {
+            $("#" + currentModal + " :focusable").each(function () {
+                var element = $(this);
+                element.keydown(function (event) {
+                    currentElement = $(this)[0];
+                    var focusables = $("#" + currentModal + " :focusable");
+                    if (focusables.length > 0) {
+                        var firstFocusable = focusables[0];
+                        var lastFocusable = focusables[focusables.length - 1];
+
+                        if (currentElement === firstFocusable && event.keyCode == 9 && event.shiftKey) {
+                            event.preventDefault();
+                            $(lastFocusable).focus();
+                        } else if (currentElement === lastFocusable && event.keyCode == 9 && !event.shiftKey) {
+                            event.preventDefault();
+                            $(firstFocusable).focus();
+                        }
+                    }
+                });
+            })
+        },
+        isLocalStorageValid: function () {
+            if (!$.isEmptyObject(localStorage.umLibraryFavorites)) {
+                return true;
+            }
+            return false;
         },
         fillLinksList: function () {
             var modalContent = document.getElementById("favorite-links-modal-window-content-list");

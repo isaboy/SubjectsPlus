@@ -208,13 +208,6 @@ favorite-links-options-menu
     font-weight: bold;
 }
 
-.favorite-links-modal-window-close-button:hover,
-.favorite-links-modal-window-close-button:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
 #favoriteLinksSearchBar {
     font-size: 16px;
     padding: 12px 80px;
