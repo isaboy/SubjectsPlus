@@ -606,6 +606,7 @@ function favoriteDatabasesList() {
         },
         loadFromGoogleDriveButtonBehavior: function () {
             $("#umlibrary_favorite_links_load_from_drive_button").click(function (event) {
+                event.preventDefault();
                 umlibrary_favorite_links.checkIfPreviouslyLoggedIn();
                 gapi.auth.authorize(
                     {
@@ -794,7 +795,14 @@ function favoriteDatabasesList() {
                         }
                     }
                 });
-            })
+            });
+
+            $("#" + currentModal).keyup(function(e) { //TO Do function to call to when closing things
+                if (e.keyCode == 27) {
+                    $(this).hide();
+                    $(window).off('scroll mousewheel touchmove');
+                }
+            });
         },
         isLocalStorageValid: function () {
             if (!$.isEmptyObject(localStorage.umLibraryFavorites)) {
