@@ -148,6 +148,7 @@
 #favorite-links-files-from-google-drive-content{
     background-color: #fefefe;
     margin: auto;
+    z-index: 3;
     padding: 20px;
     border: 1px solid #888;
     width: 80%;

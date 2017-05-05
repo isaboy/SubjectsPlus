@@ -38,6 +38,7 @@ function favoriteDatabasesList() {
     var thisSiteConfig;
 
     var previouslyLoggedIn = false;
+    var dialogBoxOpened = false;
     var umlibrary_favorite_links = {
         init: function () {
                 if (!umlibrary_favorite_links.isInIFrame()){
@@ -501,7 +502,8 @@ function favoriteDatabasesList() {
             umlibrary_favorite_links.propagateFavorites();
         },
         exportFavoritesList: function () {
-            $("#umlibrary_favorite_links_save_favorites_button").click(function () {
+            $("#umlibrary_favorite_links_save_favorites_button").click(function (event) {
+                    event.preventDefault();
                     if (typeof(Storage) !== "undefined") {
                         if (!$.isEmptyObject(localStorage.umLibraryFavorites)) {
                             if (umlibrary_favorite_links.getInternetExplorerVersion() != 0) {
@@ -509,6 +511,7 @@ function favoriteDatabasesList() {
                             } else {
                                 umlibrary_favorite_links.saveOnDisk();
                             }
+                            dialogBoxOpened = true;
                         }
                     }
                 }
@@ -647,11 +650,11 @@ function favoriteDatabasesList() {
         },
         loadFilesFromGoogleDrive: function () {
             //Here is where the loading magic happens!!!!
-            var driveFilesList = document.getElementById('favorite-links-files-from-google-drive');
-            var driveFilesListContent = document.getElementById('favorite-links-files-from-google-drive-content');
-            $("#favorite-links-files-from-google-drive-content ul").remove();
-            var ul = document.createElement('ul');
-            driveFilesListContent.appendChild(ul);
+            // var driveFilesList = document.getElementById('favorite-links-files-from-google-drive');
+            // var driveFilesListContent = document.getElementById('favorite-links-files-from-google-drive-content');
+            // $("#favorite-links-files-from-google-drive-content ul").remove();
+            // var ul = document.createElement('ul');
+            // driveFilesListContent.appendChild(ul);
             var request = gapi.client.drive.files.list({
                 'q': "appProperties has { key='umlibraryfile' and value='umlibrary-favorite-links-file' }",
                 'fields': "nextPageToken, files(id, name)"
@@ -661,23 +664,26 @@ function favoriteDatabasesList() {
                 if (files && files.length > 0) {
                     for (var i = 0; i < files.length; i++) {
                         var file = files[i];
-                        var li = document.createElement('li');
-                        li.className = 'umlibrary-favorite-links-saved-file-item';
-                        li.setAttribute('googleDriveFileId', file.id);
-                        li.appendChild(document.createTextNode(file.name));
-
-                        $(li).click(function (event) {
-                            umlibrary_favorite_links.getFileInformationFromGoogleDrive($(this).attr('googleDriveFileId'));
-                        });
-
-                        ul.appendChild(li);
+                        umlibrary_favorite_links.getFileInformationFromGoogleDrive(file.id);
+                        break;
+                        // var li = document.createElement('li');
+                        // li.className = 'umlibrary-favorite-links-saved-file-item';
+                        // li.setAttribute('googleDriveFileId', file.id);
+                        // li.appendChild(document.createTextNode(file.name));
+                        //
+                        // $(li).click(function (event) {
+                        //     umlibrary_favorite_links.getFileInformationFromGoogleDrive($(this).attr('googleDriveFileId'));
+                        // });
+                        //
+                        // ul.appendChild(li);
                     }
                 } else {
-                    ul.appendChild(document.createTextNode('No favorite files found!'));
+                    alert('Sorry, there is not any saved Quick Links file');
+                    // ul.appendChild(document.createTextNode('No favorite files found!'));
                 }
             });
 
-            driveFilesList.style.display = "block";
+            // driveFilesList.style.display = "block";
         },
         getFileInformationFromGoogleDrive: function (fileId) {
             var request = gapi.client.drive.files.get({
@@ -706,6 +712,7 @@ function favoriteDatabasesList() {
         },
         saveToGoogleDriveButtonBehavior: function () {
             $("#umlibrary_favorite_links_save_to_drive_button").click(function (event) {
+                event.preventDefault();
                 umlibrary_favorite_links.checkIfPreviouslyLoggedIn();
                 gapi.auth.authorize(
                     {
@@ -799,8 +806,10 @@ function favoriteDatabasesList() {
 
             $("#" + currentModal).keyup(function(e) { //TO Do function to call to when closing things
                 if (e.keyCode == 27) {
-                    $(this).hide();
-                    $(window).off('scroll mousewheel touchmove');
+                    if (!dialogBoxOpened) {
+                        $(this).hide();
+                        $(window).off('scroll mousewheel touchmove');
+                    }
                 }
             });
         },
