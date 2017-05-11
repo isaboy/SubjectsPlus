@@ -1,0 +1,50 @@
+{
+  "sp": {
+    "sites": [
+      {
+        "origin": "http://development.library.miami.edu",
+        "sendTo": "http://10.179.1.174/"
+      },
+      {
+        "origin": "http://sp.library.miami.edu",
+        "sendTo": "http://10.179.1.174/"
+      },
+      {
+        "origin": "http://sp4.local",
+        "sendTo": "http://10.179.1.174/um-library-website",
+        "acceptFrom": "http://10.179.1.174",
+        "environment": "local"
+      }
+    ],
+    "siteMarkupClasses": {
+      "favoriteButtonAccountMenuDivClass": "mega_child mega-sm mega-right-special2",
+      "favoriteButtonDatabaseListDivClass": "favorite_button",
+      "favoriteButtonIconClass": "favorite-database-icon",
+      "favoriteButtonPageHeaderDivClass": ""
+    }
+  },
+  "wp": {
+    "sites": [
+      {
+        "origin": "http://library.miami.edu",
+        "sendTo": "http://10.179.1.174/"
+      },
+      {
+        "origin": "http://dev-www.library.miami.edu/",
+        "sendTo": "http://10.179.1.174/"
+      },
+      {
+        "origin": "http://10.179.1.174/um-library-website",
+        "sendTo": "http://sp4.local/subjects/databases.php",
+        "acceptFrom": "http://sp4.local",
+        "environment": "local"
+      }
+    ],
+    "siteMarkupClasses": {
+      "headerClass": "page-header",
+      "favoriteButtonAccountMenuDivClass": "login mega tour_6",
+      "favoriteButtonIconClass": "favorite-database-icon"
+    }
+  },
+  "minimumItemsCountForSearchBar": 5
+}
