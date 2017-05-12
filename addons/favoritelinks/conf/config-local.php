@@ -18,6 +18,8 @@ switch($referer) {
     //Define SP urls
     case 'development.library.miami.edu':
         define('SITE_URL', 'http://sp4.local');
+        define('CONF_PATH', '/subversion/www/html/devel/dev-non-svn/rails_projects/sp4dev-staging-afc/addons/favoritelinks/conf/json/');
+        define('SITE_TYPE', 'sp');
         break;
 
     case 'library.miami.edu':

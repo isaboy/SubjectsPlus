@@ -3,7 +3,9 @@
     "sites": [
       {
         "origin": "http://development.library.miami.edu",
-        "sendTo": "http://10.179.1.174/"
+        "sendTo": "http://10.179.1.174",
+        "acceptFrom": "http://10.179.1.174",
+        "environment": "development"
       },
       {
         "origin": "http://sp.library.miami.edu",
