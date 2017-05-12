@@ -3,8 +3,8 @@
     "sites": [
       {
         "origin": "http://development.library.miami.edu",
-        "sendTo": "http://10.179.1.174",
-        "acceptFrom": "http://10.179.1.174",
+        "sendTo": "http://dev-www.library.miami.edu",
+        "acceptFrom": "http://dev-www.library.miami.edu",
         "environment": "development"
       },
       {
@@ -29,11 +29,13 @@
     "sites": [
       {
         "origin": "http://library.miami.edu",
-        "sendTo": "http://10.179.1.174/"
+        "sendTo": "http://10.179.1.174"
       },
       {
-        "origin": "http://dev-www.library.miami.edu/",
-        "sendTo": "http://10.179.1.174/"
+        "origin": "http://dev-www.library.miami.edu",
+        "sendTo": "http://development.library.miami.edu/sp4dev-staging-afc/subjects/databases.php",
+        "acceptFrom": "http://development.library.miami.edu",
+        "environment": "development"
       },
       {
         "origin": "http://10.179.1.174/um-library-website",
