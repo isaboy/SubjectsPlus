@@ -34,7 +34,7 @@ switch($referer) {
 
     //Define WP urls
     case 'dev-www.library.miami.edu':
-        define('SITE_URL', 'http://dev-www.library.miami.edu/');
+        define('SITE_URL', 'http://dev-www.library.miami.edu');
         define('CONF_PATH', '/subversion/www/html/devel/dev-non-svn/rails_projects/sp4dev-staging-afc/addons/favoritelinks/conf/json/');
         define('SITE_TYPE', 'wp');
         break;
