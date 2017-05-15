@@ -1,5 +1,4 @@
 <?php
-header('Access-Control-Allow-Origin: *');
 
 include('conf/config-local.php');
 
