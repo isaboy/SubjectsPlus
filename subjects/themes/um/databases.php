@@ -1,6 +1,4 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-
 /**
  *   @file databases.php 
  *   @brief themed override of db a-z page for U Miami
