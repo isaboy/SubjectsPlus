@@ -283,7 +283,14 @@ $legend = "<p>\n<img src=\"$IconPath/v2-lock.png\" border=\"0\" alt=\"Restricted
 	<div class="pure-g">
 		<div class="pure-u-1 pure-u-lg-3-4 panel-adj">
 			<div class="breather">
-				<?php print $db_results; ?>
+				<?php
+                print $db_results;
+                global $favorite_links_enabled;
+                if ($favorite_links_enabled):?>
+                    <script>
+                        fdl.setFavorites();
+                    </script>
+                <?php endif;?>
 			</div>
 		</div> <!--end 3/4 main area column-->
 
@@ -393,13 +400,3 @@ $(document).ready(function(){
 	}
 });
 </script>
-
-<?php
-global $favorite_links_enabled;
-if ($favorite_links_enabled) {
-    include('../addons/favoritelinks/index.php');
-    ?>
-<?php
-}
-?>
-

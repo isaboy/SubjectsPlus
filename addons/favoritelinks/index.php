@@ -67,8 +67,10 @@ $defaultLinks = file_get_contents($conf_folder_path . 'defaultLinks.json');
 
     <?php include('js/favoritelinks.js'); ?>
     var fdl = favoriteDatabasesList();
-    fdl.init();
 
+    window.onload = function () {
+        fdl.init();
+    }
 </script>
 
 <style>
