@@ -11,6 +11,7 @@ use SubjectsPlus\Control\Querier;
 use SubjectsPlus\Control\CompleteMe;
 use SubjectsPlus\Control\DbHandler;
 
+setFrameSettings();
 $db = new Querier;
 
 $use_jquery = array("ui");
@@ -394,7 +395,8 @@ $(document).ready(function(){
 </script>
 
 <?php
-if (true) { //TODO
+global $favorite_links_enabled;
+if ($favorite_links_enabled) {
     include('../addons/favoritelinks/index.php');
     ?>
 <?php

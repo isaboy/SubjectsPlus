@@ -1,5 +1,5 @@
 <?php
-
+header('Access-Control-Allow-Origin: *');
 include('conf/config-local.php');
 
 $site = SITE_URL;

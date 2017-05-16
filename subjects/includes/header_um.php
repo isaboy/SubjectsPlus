@@ -473,7 +473,8 @@ if( (isset($google_analytics_ua)) && (( !empty($google_analytics_ua))) ) {
         <div class="pure-u-1">
           <h1><?php print $page_title; ?></h1>
           <?php
-            if (true){//TODO ?>
+          global $favorite_links_enabled;
+          if ($favorite_links_enabled) {?>
             <button class="fa fa-star-o fa-3 umlibrary-favorite-button"></button>
           <?php  }
           ?>

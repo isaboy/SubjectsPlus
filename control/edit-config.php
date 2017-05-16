@@ -165,7 +165,9 @@ if(!is_writable($lstrConfigFilePath))
 
 							"booklist_primo_api_key" => array( _( "Book List PlusletPrimo API Key" ), _( "This option contains the Primo API Key for the Book List Pluslet" ), "string", "right", "large", "" , ""),
 
-                            "i_frame_settings" => array( _( "Render page on i-frame settings" ), _( "Type one setting. \n For example: DENY, SAMEORIGIN or ALLOW-FROM + trusted url(include http/https). Default to SAMEORIGIN" ), "string", "right", "large", "", _("") )
+                            "i_frame_settings" => array( _( "Render page on i-frame settings" ), _( "Type one setting. \n For example: DENY, SAMEORIGIN or ALLOW-FROM + trusted url(include http/https). Default to SAMEORIGIN" ), "string", "right", "large", "", _("") ),
+
+                            "favorite_links_enabled" => array( _( "Favorite Links" ), _( "Enable favorite links" ), "boolean", "right", "small", "", _("") )
 
 
     );

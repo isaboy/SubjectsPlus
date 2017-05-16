@@ -432,7 +432,8 @@ ORDER BY newtitle
       <td style=\"width: 120px\">$information1 <span class=\"db_icons\">$icons</span></td><td><a href=\"$url\" $target>$item_title</a>  $helpguide $display_note_text
         <div class=\"list_bonus\">$bonus</div>";
 
-        if (true){ //TODO
+        global $favorite_links_enabled;
+        if ($favorite_links_enabled) { //TODO
             $onerow = $onerow . " <div class=\"favorite_button\">".self::generateFavoriteButton()."</div>";
         }
 

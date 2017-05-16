@@ -11,16 +11,15 @@ if (file_exists("config.php")) {
 function setFrameSettings()
 {
     global $i_frame_settings;
+
     $setting = $i_frame_settings;
     $user_agent = $_SERVER['HTTP_USER_AGENT'];
     $is_ie = false;
-
-    if (isset($_SERVER['HTTP_USER_AGENT']) && (strpos($_SERVER['HTTP_USER_AGENT'], 'Trident') !== false)) {
+    if (isset($_SERVER['HTTP_USER_AGENT']) && (stripos($_SERVER['HTTP_USER_AGENT'], 'Trident') !== false)) {
         $is_ie = true;
     }
 
     if (empty($setting)) {
-        var_dump($setting);
         if (stripos($user_agent, "Chrome") !== false || stripos($user_agent, 'Safari') !== false) {
             $setting = " self";
         } else {
@@ -32,14 +31,15 @@ function setFrameSettings()
         $setting = str_replace("self", "'self'", $setting);
     }
 
-    if (strpos($setting, 'ALLOW-FROM') !== false) {
+    if (stripos($setting, "ALLOW-FROM") !== false) {
+        $a= "aaaa";
         if (!$is_ie) {
             $temp = explode("ALLOW-FROM", $setting);
             $trusted_site_url = $temp[1];
         }else{
             $trusted_site_url = $setting;
         }
-    } elseif (strpos($setting, 'SAMEORIGIN') !== false) {
+    } elseif (stripos($setting, 'SAMEORIGIN') !== false) {
         if (!$is_ie){
             $trusted_site_url = " 'self'";
         }else{
@@ -70,6 +70,7 @@ function setFrameSettings()
     } else {
         @header('Content-Security-Policy: frame-ancestors' . $trusted_site_url);
     }
+
 }
 
 //////////////////////////////
