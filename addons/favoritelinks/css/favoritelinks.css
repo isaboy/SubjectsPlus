@@ -189,9 +189,12 @@ favorite-links-options-menu
 
 #quick-links-modal-window-left-div {
     display: inline-block;
+    width: 30%;
 }
 
-
+#quick-links-modal-window-right-div {
+    display: inline-block;
+    width: 70%;}
 
 
 /*----------------------------------------------------------------------------*/
@@ -268,3 +271,8 @@ favorite-links-options-menu
     margin: 0;
     padding: 0;
 }
+
+/* Media Queries */
+
+
+

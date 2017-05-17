@@ -169,7 +169,7 @@ function favoriteDatabasesList() {
 
             var saveLinksAnchor = document.createElement('a');
             saveLinksAnchor.href='';
-            saveLinksAnchor.appendChild(document.createTextNode('Save Links'));
+            saveLinksAnchor.appendChild(document.createTextNode('Back Up List'));
 
             var divSubNav = document.createElement('div');
             divSubNav.className = "fl-sub-nav";
@@ -183,7 +183,7 @@ function favoriteDatabasesList() {
             saveFavorites.href='';
             saveFavorites.setAttribute('id', 'umlibrary_favorite_links_save_favorites_button');
             saveFavorites.className = 'umlibrarysurvey-favorites-actions';
-            saveFavorites.text = 'Save to local drive';
+            saveFavorites.text = 'Back up to local drive';
 
             var saveToLocalIcon = document.createElement('i');
             saveToLocalIcon.className = "fa fa-hdd-o fa-3";
@@ -197,7 +197,7 @@ function favoriteDatabasesList() {
             saveFavoritesToDrive.href='';
             saveFavoritesToDrive.setAttribute('id', 'umlibrary_favorite_links_save_to_drive_button');
             saveFavoritesToDrive.className = 'umlibrarysurvey-favorites-actions';
-            saveFavoritesToDrive.text = 'Save to Google Drive';
+            saveFavoritesToDrive.text = 'Back up to Google Drive';
 
             var saveToDriveIcon = document.createElement('i');
             saveToDriveIcon.className = "fa fa-cloud-upload fa-3";
@@ -220,7 +220,7 @@ function favoriteDatabasesList() {
 
             var loadLinksAnchor = document.createElement('a');
             loadLinksAnchor.href='';
-            loadLinksAnchor.appendChild(document.createTextNode('Load Links'));
+            loadLinksAnchor.appendChild(document.createTextNode('Import List'));
 
             var divSubNav = document.createElement('div');
             divSubNav.className = "fl-sub-nav";
@@ -234,7 +234,7 @@ function favoriteDatabasesList() {
             loadFavorites.href='';
             loadFavorites.setAttribute('id', 'umlibrary_favorite_links_load_favorites_button');
             loadFavorites.className = 'umlibrarysurvey-favorites-actions';
-            loadFavorites.text = 'Load from local drive';
+            loadFavorites.text = 'Import from local drive';
 
             var loadFromLocalIcon = document.createElement('i');
             loadFromLocalIcon.className = "fa fa-hdd-o fa-3";
@@ -248,7 +248,7 @@ function favoriteDatabasesList() {
             loadFavoritesFromDrive.href='';
             loadFavoritesFromDrive.setAttribute('id', 'umlibrary_favorite_links_load_from_drive_button');
             loadFavoritesFromDrive.className = 'umlibrarysurvey-favorites-actions';
-            loadFavoritesFromDrive.text = 'Load from Google Drive';
+            loadFavoritesFromDrive.text = 'Import from Google Drive';
 
             var loadFromDriveIcon = document.createElement('i');
             loadFromDriveIcon.className = "fa fa-cloud-download fa-3";
@@ -407,13 +407,13 @@ function favoriteDatabasesList() {
                         linkName = $(anchor).text();
                         urlLink = $(anchor).attr('href');
                         if (!deleting) {
-                            umlibrary_favorite_links.saveFavoritesToLocalStorage(linkName, urlLink, 'Database', true);
+                            umlibrary_favorite_links.saveFavoritesToLocalStorage(linkName, urlLink, 'Databases', true);
                         }
                     }else{
                         linkName = document.getElementsByTagName("title")[0].innerHTML;
                         urlLink = document.URL;
                         if (!deleting) {
-                            umlibrary_favorite_links.saveFavoritesToLocalStorage(linkName, urlLink, 'Page', true);
+                            umlibrary_favorite_links.saveFavoritesToLocalStorage(linkName, urlLink, 'Pages', true);
                         }
                     }
 
@@ -716,18 +716,24 @@ function favoriteDatabasesList() {
         },
         createQuickLinksDescription: function(rightDiv){
             var header = document.createElement('h2');
-            header.appendChild(document.createTextNode("What are these \"Quick Links\"?"));
+            header.appendChild(document.createTextNode("What are My Favorite Links?"));
 
             var description = document.createElement('p');
-            description.appendChild(document.createTextNode("Quick Links are a way of storing your most frequented pages or databases without logging in. They are tied to your computer and " +
-                "your web browser, so they will disappear if you clear your cache or use another computer. But you can always save and export them using the buttons above ^^."));
+            description.appendChild(document.createTextNode("Favorite Links are a way of storing your most frequented pages or databases without logging in. They are tied to your computer and your web browser, so they will disappear if you clear your cache or use another computer."));
 
-            var instructions = document.createElement('p');
-            instructions.appendChild(document.createTextNode("* Add a link by clicking on the link icon when you see it." + "* Find your links under Quick Links in the Accounts+ Menu."));
+            var instructionsHeading1 = document.createElement('h2');
+            instructionsHeading1.appendChild(document.createTextNode("How to use this feature"));
+
+            var instructionsContainer1 = document.createElement('ul');
+            var instructionsSet1 = document.createElement('li');
+            instructionsSet1.appendChild(document.createTextNode("Add a favorite link by clicking on the open star icon"));
+
+            instructionsContainer1.appendChild(instructionsSet1);
 
             rightDiv.appendChild(header);
             rightDiv.appendChild(description);
-            rightDiv.appendChild(instructions);
+            rightDiv.appendChild(instructionsHeading1);
+            rightDiv.appendChild(instructionsContainer1);
 
         },
         generateModalCloseButton: function (parentToClose, id) {
