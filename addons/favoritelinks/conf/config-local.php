@@ -26,9 +26,9 @@ switch($referer) {
         define('SITE_URL', 'http://sp4.local');
         break;
 
-    case 'sp4.local':
-        define('SITE_URL', 'http://sp4.local');
-        define('CONF_PATH', '/var/www/sp4.local/public/addons/favoritelinks/conf/json/');
+    case 'localhost/sp4/sp4-favlinks-pv':
+        define('SITE_URL', 'http://localhost/sp4/sp4-favlinks-pv');
+        define('CONF_PATH', '/Applications/MAMP/htdocs/sp4/sp4-favlinks-pv/public/addons/favoritelinks/conf/json/');
         define('SITE_TYPE', 'sp');
         break;
 
@@ -43,9 +43,9 @@ switch($referer) {
 //        define('SITE_URL', 'http://sp4.local');
 //        break;
 //
-    case '10.179.1.174':
-        define('SITE_URL', 'http://10.179.1.174/um-library-website');
-        define('CONF_PATH', '/var/www/sp4.local/public/addons/favoritelinks/conf/json/');
+    case 'localhost/richter':
+        define('SITE_URL', 'http://localhost/richter');
+        define('CONF_PATH', '/Applications/MAMP/htdocs/sp4/sp4-favlinks-pv/public/addons/favoritelinks/conf/json/');
         define('SITE_TYPE', 'wp');
         break;
 }
