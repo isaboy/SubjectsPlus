@@ -26,9 +26,9 @@ switch($referer) {
         define('SITE_URL', 'http://sp4.local');
         break;
 
-    case 'localhost/sp4/sp4-favlinks-pv':
+    case 'localhost':
         define('SITE_URL', 'http://localhost/sp4/sp4-favlinks-pv');
-        define('CONF_PATH', '/Applications/MAMP/htdocs/sp4/sp4-favlinks-pv/public/addons/favoritelinks/conf/json/');
+        define('CONF_PATH', '/Applications/MAMP/htdocs/sp4/sp4-favlinks-pv/addons/favoritelinks/conf/json/');
         define('SITE_TYPE', 'sp');
         break;
 
@@ -45,7 +45,7 @@ switch($referer) {
 //
     case 'localhost/richter':
         define('SITE_URL', 'http://localhost/richter');
-        define('CONF_PATH', '/Applications/MAMP/htdocs/sp4/sp4-favlinks-pv/public/addons/favoritelinks/conf/json/');
+        define('CONF_PATH', '/Applications/MAMP/htdocs/sp4/sp4-favlinks-pv/addons/favoritelinks/conf/json/');
         define('SITE_TYPE', 'wp');
         break;
 }

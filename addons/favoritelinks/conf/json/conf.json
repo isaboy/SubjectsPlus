@@ -16,6 +16,12 @@
         "sendTo": "http://10.179.1.174/um-library-website",
         "acceptFrom": "http://10.179.1.174",
         "environment": "local"
+      },
+      {
+        "origin": "http://localhost/sp4/sp4-favlinks-pv",
+        "sendTo": "http://localhost/richter",
+        "acceptFrom": "http://localhost/richter",
+        "environment": "local"
       }
     ],
     "siteMarkupClasses": {
@@ -38,9 +44,9 @@
         "environment": "development"
       },
       {
-        "origin": "http://10.179.1.174/um-library-website",
-        "sendTo": "http://sp4.local/subjects/databases.php",
-        "acceptFrom": "http://sp4.local",
+        "origin": "http://localhost/richter",
+        "sendTo": "http://localhost/sp4/sp4-favlinks-pv/subjects/databases.php",
+        "acceptFrom": "http://localhost/sp4/sp4-favlinks-pv",
         "environment": "local"
       }
     ],
