@@ -8,7 +8,7 @@ function favoriteDatabasesList() {
                     if (thisSite === 'sp'){
                         umlibrary_favorite_links.includeVendorsJSAndCSS();
                     }
-                    umlibrary_favorite_links.prepareUI();
+                    umlibrary_favorite_links.prepareUI();                    
 
                     window.onbeforeunload = function(event) {
                         umlibrary_favorite_links.logOutFromGoogle(false);
@@ -48,7 +48,7 @@ function favoriteDatabasesList() {
             umlibrary_favorite_links.exportFavoritesList();
             umlibrary_favorite_links.importFavorites();
             umlibrary_favorite_links.favoritesListInput();
-        },
+        },        
         showFavoriteAndMenuButtons: function () {
             if (thisSite==='sp') {
                 var databasesDiv = document.getElementsByClassName(siteMarkupClasses['favoriteButtonDatabaseListDivClass']);
@@ -106,22 +106,27 @@ function favoriteDatabasesList() {
             leftDiv.className = 'quick-links-modal-window-column';
             modalContent.appendChild(leftDiv);
 
-            umlibrary_favorite_links.createSearchBar(leftDiv);
+            umlibrary_favorite_links.createSearchBar(leftDiv);            
 
             var divList = document.createElement("div");
             divList.id = "favorite-links-modal-window-content-list";
+
+            
+
             leftDiv.appendChild(divList);
+
         },
         createSearchBar: function (container) {
             var searchBar = document.createElement('input');
             searchBar.type = "text";
             searchBar.id = "favoriteLinksSearchBar";
-            searchBar.placeholder = "Search for quick links";
+            searchBar.placeholder = "Find in my favorite links";
             searchBar.style.display = 'none';
 
             var searchBarDiv = document.createElement('div');
+            searchBarDiv.id = 'searchBarContainer';
             searchBarDiv.appendChild(searchBar);
-            container.appendChild(searchBarDiv);
+            container.append(searchBarDiv);       
 
             if (!$.isEmptyObject(localStorage.umLibraryFavorites)) {
                 var favorites = JSON.parse(localStorage.umLibraryFavorites);
@@ -577,7 +582,7 @@ function favoriteDatabasesList() {
                 modal.style.display = "block";
                 var favorites = JSON.parse(localStorage.umLibraryFavorites);
                 if (favorites.length > minimumItemsCountForSearchBar) {
-                    document.querySelector('#favoriteLinksSearchBar').style.display= 'block';
+                    document.querySelector('#favoriteLinksSearchBar').style.display= 'inline-block';
                     document.querySelector('#favoriteLinksSearchBar').focus();
                 }else{
                     document.querySelector('#favorite-links-modal-window').focus();
@@ -721,19 +726,49 @@ function favoriteDatabasesList() {
             var description = document.createElement('p');
             description.appendChild(document.createTextNode("Favorite Links are a way of storing your most frequented pages or databases without logging in. They are tied to your computer and your web browser, so they will disappear if you clear your cache or use another computer."));
 
-            var instructionsHeading1 = document.createElement('h2');
-            instructionsHeading1.appendChild(document.createTextNode("How to use this feature"));
+            var header2 = document.createElement('h2');
+            header2.appendChild(document.createTextNode("How to use this feature"));
 
-            var instructionsContainer1 = document.createElement('ul');
-            var instructionsSet1 = document.createElement('li');
-            instructionsSet1.appendChild(document.createTextNode("Add a favorite link by clicking on the open star icon"));
+            var instructionsList = document.createElement('ul');
+            
+            var instructionsItem1 = document.createElement('li');
+            instructionsItem1.appendChild(document.createTextNode("Add a favorite link by clicking on the open star icon"));
+            
+            var starOpen = document.createElement('i');
+            starOpen.setAttribute("class", "fa fa-star-o");
+            instructionsItem1.append(starOpen);
 
-            instructionsContainer1.appendChild(instructionsSet1);
+            var instructionsItem2 = document.createElement('li');
+            instructionsItem2.appendChild(document.createTextNode("Your favorite links will display the colored star icon"));
+
+            var starClosed = document.createElement('i');
+            starClosed.setAttribute("class", "fa fa-star");
+            instructionsItem2.append(starClosed);
+
+
+            var instructionsItem3 = document.createElement('li');
+            instructionsItem3.appendChild(document.createTextNode("Find your favorite links under the Accounts+ Menu"));
+
+            instructionsList.appendChild(instructionsItem1);
+            instructionsList.appendChild(instructionsItem2);
+            instructionsList.appendChild(instructionsItem3);
+
+            var header3 = document.createElement('h2');
+            header3.appendChild(document.createTextNode("How to back up your Favorite Links"));
+
+            var description2 = document.createElement('p');
+            description2.appendChild(document.createTextNode("Your favorite links are automatically stored once you click the star, however if you have saved a lot of links and want to transfer them to a new computer (or like to clean your browser cache a lot), you can use the Back Up List and Import List functionality."));
+            var note = document.createElement('p');
+            note.appendChild(document.createTextNode("Favorite links can be backed up to your local computer or Google Drive."));
+
 
             rightDiv.appendChild(header);
             rightDiv.appendChild(description);
-            rightDiv.appendChild(instructionsHeading1);
-            rightDiv.appendChild(instructionsContainer1);
+            rightDiv.appendChild(header2);
+            rightDiv.appendChild(instructionsList);
+            rightDiv.appendChild(header3);
+            rightDiv.appendChild(description2);
+            rightDiv.appendChild(note);
 
         },
         generateModalCloseButton: function (parentToClose, id) {
@@ -793,7 +828,7 @@ function favoriteDatabasesList() {
                 var favorites = JSON.parse(localStorage.umLibraryFavorites);
                 if (favorites.length > 0) {
                     var fieldset = document.createElement('fieldset');
-                    fieldset.className = "umlibrary-favorite-links-filterby-fieldset";
+                    fieldset.className = "umlibrary-favorite-links-filterby-fieldset";                    
                     var legend = document.createElement('legend').appendChild(document.createTextNode('Filter by:'));
                     fieldset.appendChild(legend);
 
@@ -859,7 +894,7 @@ function favoriteDatabasesList() {
                     modalContent.innerHTML = "";
                     modalContent.appendChild(fieldset);
                     modalContent.appendChild(list);
-                    umlibrary_favorite_links.filterTagBehavior();
+                    umlibrary_favorite_links.filterTagBehavior();                    
                 } else{
                     modalContent.innerHTML="";
                     modalContent.appendChild(document.createTextNode("Looks like you haven't set any favorite links yet"));
@@ -868,6 +903,7 @@ function favoriteDatabasesList() {
                 modalContent.innerHTML="";
                 modalContent.appendChild(document.createTextNode("Looks like you haven't set any favorite links yet"));
             }
+            
         },
         removeFavoriteFromList: function (listItem) {
             var anchor = $(listItem).find('a')[0];
@@ -937,7 +973,7 @@ function favoriteDatabasesList() {
                 return false;
             }
             return true;
-        }
+        }      
     };
 
     return umlibrary_favorite_links;

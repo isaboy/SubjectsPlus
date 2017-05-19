@@ -1,3 +1,63 @@
+/*-- Wrappers --*/
+
+#favorite-links-modal-window {
+    display: none;
+    position: fixed;
+    z-index: 99999999999;
+    padding-top: 50px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+}
+
+#favorite-links-modal-window-content {
+    background-color: #ffffff;
+    margin: auto;
+    padding: 25px;
+    border: 1px solid #CCC;
+    width: 80%;
+    display: block;
+    border-radius: 2px;
+    height: 330px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#quick-links-modal-window-left-div,
+#quick-links-modal-window-right-div {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 30px;
+    vertical-align: top;
+}
+
+
+
+/*-- Links Panel --*/
+
+
+
+/*-- Filters --*/
+
+
+/*-- Input Filter --*/
+
+
+/*-- List --*/
+
+
+/*-- Buttons --*/
+
+
+
+/*-- Scrollbar --*/
+
+
+/*-- Instructions --*/
+
+
 .favorite_links_options{
     opacity: 1;
     display: none;
@@ -150,27 +210,9 @@ favorite-links-options-menu
     cursor: pointer;
 }
 
-#favorite-links-modal-window {
-    display: none;
-    position: fixed;
-    z-index: 99999999999;
-    padding-top: 100px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-}
 
-#favorite-links-modal-window-content {
-    background-color: #ffffff;
-    margin: auto;
-    padding: 25px;
-    border: 1px solid #888;
-    width: 80%;
-    display: block;
-}
+
+
 
 .favorite-links-modal-window-close-button {
     color: #aaaaaa;
@@ -187,14 +229,7 @@ favorite-links-options-menu
     box-sizing : border-box;
 }
 
-#quick-links-modal-window-left-div {
-    display: inline-block;
-    width: 30%;
-}
 
-#quick-links-modal-window-right-div {
-    display: inline-block;
-    width: 70%;}
 
 
 /*----------------------------------------------------------------------------*/
@@ -272,7 +307,50 @@ favorite-links-options-menu
     padding: 0;
 }
 
-/* Media Queries */
+/* //////////////////
+//  Media Queries 
+////////////////// */
+
+/* 480 exact */
+@media screen and (min-width: 480px) {
+
+    #favorite-links-modal-window-content { height: 200px; }
+
+}
+
+/* ≥ 568px  .pure-u-sm-* */
+@media screen and (min-width: 35.5em) {
+
+    #favorite-links-modal-window-content { height: 650px; }
+
+}
+
+
+/* ≥ 768px  .pure-u-md-* */
+@media screen and (min-width: 48em) { 
+
+    #favorite-links-modal-window { padding-top: 70px; background-color: rgba(0,0,0,0.4); }
+
+    #quick-links-modal-window-left-div {width: 35%; margin-right: 5%;}
+    #quick-links-modal-window-right-div { width: 60%; }
+}
+
+
+/* ≥ 1024px     .pure-u-lg-* */
+@media screen and (min-width: 64em) { 
+
+    #favorite-links-modal-window-content { height: 500px; overflow: hidden;}
+
+}
+
+
+
+/* ≥ 1280px     .pure-u-xl-* */
+@media screen and (min-width: 80em) { 
+
+}
+
+
 
 
 
