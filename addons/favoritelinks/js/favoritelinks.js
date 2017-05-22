@@ -97,6 +97,25 @@ function favoriteDatabasesList() {
             modal.appendChild(modalContent);
             document.body.appendChild(modal);
 
+            var modalHeaderBar = document.createElement('div');
+            modalHeaderBar.className= 'modal-header';
+            var modalHeaderTitle = document.createElement('h2');
+
+            var starClosed = document.createElement('i');
+            starClosed.setAttribute("class", "fa fa-star");
+            modalHeaderTitle.append(starClosed);
+
+            modalHeaderTitle.appendChild(document.createTextNode('My Favorite Links'));
+            modalHeaderBar.appendChild(modalHeaderTitle);
+
+
+
+
+
+            modalContent.appendChild(modalHeaderBar);
+
+            modalHeaderBar.appendChild(umlibrary_favorite_links.generateModalCloseButton($(modalHeaderBar).parent().parent(), "favorite-links-modal-close-button"));
+
             umlibrary_favorite_links.createLeftSideOfModal(modalContent);
             umlibrary_favorite_links.createRightSideOfModal(modalContent);
         },
@@ -161,11 +180,8 @@ function favoriteDatabasesList() {
         favoriteLinksModalHeader: function (container) {
             var favoriteListInput = document.createElement('input');
             favoriteListInput.setAttribute('id', 'favoritesListInput');
-            favoriteListInput.setAttribute('type', 'file');
+            favoriteListInput.setAttribute('type', 'file'); 
 
-           
-
-            container.appendChild(umlibrary_favorite_links.generateModalCloseButton($(container).parent().parent(), "favorite-links-modal-close-button"));
             container.appendChild(favoriteListInput);
         },
         createSaveLinksDropDownMenu: function (ul) {
@@ -418,7 +434,7 @@ function favoriteDatabasesList() {
                         linkName = document.getElementsByTagName("title")[0].innerHTML;
                         urlLink = document.URL;
                         if (!deleting) {
-                            umlibrary_favorite_links.saveFavoritesToLocalStorage(linkName, urlLink, 'Page', true);
+                            umlibrary_favorite_links.saveFavoritesToLocalStorage(linkName, urlLink, 'Pages', true);
                         }
                     }
 
@@ -720,13 +736,13 @@ function favoriteDatabasesList() {
             });
         },
         createQuickLinksDescription: function(rightDiv){
-            var header = document.createElement('h2');
+            var header = document.createElement('h3');
             header.appendChild(document.createTextNode("What are My Favorite Links?"));
 
             var description = document.createElement('p');
             description.appendChild(document.createTextNode("Favorite Links are a way of storing your most frequented pages or databases without logging in. They are tied to your computer and your web browser, so they will disappear if you clear your cache or use another computer."));
 
-            var header2 = document.createElement('h2');
+            var header2 = document.createElement('h3');
             header2.appendChild(document.createTextNode("How to use this feature"));
 
             var instructionsList = document.createElement('ul');
@@ -753,7 +769,7 @@ function favoriteDatabasesList() {
             instructionsList.appendChild(instructionsItem2);
             instructionsList.appendChild(instructionsItem3);
 
-            var header3 = document.createElement('h2');
+            var header3 = document.createElement('h3');
             header3.appendChild(document.createTextNode("How to back up your Favorite Links"));
 
             var description2 = document.createElement('p');
