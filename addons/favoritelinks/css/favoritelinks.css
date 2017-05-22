@@ -15,12 +15,12 @@
 #favorite-links-modal-window-content {
     background-color: #ffffff;
     margin: auto;
-    padding: 25px;
+    padding: 0;
     border: 1px solid #CCC;
     width: 80%;
     display: block;
     border-radius: 2px;
-    height: 330px;
+    height: 380px;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -28,9 +28,16 @@
 #quick-links-modal-window-left-div,
 #quick-links-modal-window-right-div {
     display: inline-block;
-    width: 100%;
+    width: -moz-calc(100% - 30px);
+    width: -webkit-calc(100% - 30px);
+    width: calc(100% - 30px);
     margin-bottom: 30px;
     vertical-align: top;
+    padding: 15px;
+}
+
+#quick-links-modal-window-left-div {
+    background-color: #f6f7fa;
 }
 
 
@@ -41,15 +48,181 @@
 
 /*-- Filters --*/
 
+.umlibrary-favorite-links-filterby-fieldset {
+    border: none;
+    font-size: 14px;
+    margin: 15px 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+.umlibrary-favorite-links-filter-tag{
+    display: block;
+    cursor: pointer;
+    font-style: italic;
+    font-weight: normal;
+    margin: 3px 0 0;
+}
+
+.umlibrary-favorite-links-filter-tag-checkbox {
+     margin: 0 3px 0 0;
+}
 
 /*-- Input Filter --*/
+
+#searchBarContainer {
+    display: inline-block;
+    margin: 15px 0;
+    width: 100%;
+}
+
+#favoriteLinksSearchBar {
+    font-size: 1.15em;
+    font-style: italic;
+    padding: 12px;
+    border: 1px solid #CCC;
+    width: 80%;
+    text-align: center;
+    color: #333333;
+}
 
 
 /*-- List --*/
 
+#favoriteLinksModalWindowList{
+    list-style: outside none none;   
+    font-size: 14px;
+}
 
-/*-- Buttons --*/
+.umlibrary-list-item {
+   margin: 0 0 4px; 
+}
 
+.umlibrary-favorite-links-anchor{
+    text-decoration: none !important;
+    cursor: pointer;
+    margin: 0 0 0 7px;
+    vertical-align: top;
+    max-width: 70%;
+    display: inline-block;
+}
+
+.umlibrary-list-item button {
+    float: right;
+    margin: 0 0 0 5px;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    font-size: 18px;
+    color: #999;
+}
+
+/*-- Back Up/ Import Buttons --*/
+
+#favorite-links-options-menu {
+    display: block;
+    margin: 15px -16px -16px -16px;
+}
+
+
+/* mega menu list */
+.fl-nav-menu {
+    display: block;
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    z-index: 15;
+}
+
+/* a top level navigation item in the mega menu */
+.fl-nav-item {
+    list-style: none;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    width: 50%;
+}
+
+/* first descendant link within a top level navigation item */
+.fl-nav-item > a {
+    position: relative;
+    display: inline-block;
+    padding: 1em 0;
+    text-transform: uppercase;
+    font-size: 14px;   
+}
+
+/* focus/open states of first descendant link within a top level
+   navigation item */
+.fl-nav-item > a:focus,
+.fl-nav-item > a.open {
+    border: none;
+    outline: none;
+}
+
+/* open state of first descendant link within a top level
+   navigation item */
+.fl-nav-item > a.open {
+    z-index: 1;
+}
+
+/* sub-navigation panel */
+.fl-sub-nav {
+    position: absolute;
+    display: none;
+    top: 100%;
+    padding: 1em;
+    background-color: #f6f7fa;
+    text-align: left;
+    width: 85%;
+}
+
+/* sub-navigation panel open state */
+.fl-sub-nav.open {
+    display: block;
+}
+
+/* list of items within sub-navigation panel */
+.fl-sub-nav ul {
+    display: inline-block;
+    vertical-align: top;
+    padding: 0;
+}
+
+/* list item within sub-navigation panel */
+.fl-sub-nav li {
+    display: inline-block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0.7em 0;
+    width: 100%;
+}
+
+.fl-sub-nav li:first-child {
+     border-bottom: 1px solid #cccccc;
+}
+
+.backup-list {
+    background-color: #a7adb9;
+}
+
+.backup-list > a {
+    color: #FFF;
+}
+
+.import-list {
+    background-color: #c0c5ce;
+}
+
+.import-list > a {
+    color: #65737d;
+}
+
+
+#favorite-links-options-menu .umlibrarysurvey-favorites-actions{
+    cursor: pointer;
+}
 
 
 /*-- Scrollbar --*/
@@ -70,23 +243,16 @@
     cursor: pointer;
 }
 
-#favoriteLinksModalWindowList{
-    max-width: 400px;
-}
 
-.umlibrary-list-item{
-    border: 1px solid #ddd;
-}
+
+
 
 .umlibrary-favorite-links-saved-file-item{
     padding: 0.3em;
     cursor: pointer;
 }
 
-.umlibrary-favorite-links-filter-tag{
-    padding: 0.3em;
-    cursor: pointer;
-}
+
 
 .umlibrary-favorite-links-dropdown-group {
     position: relative;
@@ -164,10 +330,7 @@
     cursor: pointer;
 }
 
-.umlibrary-favorite-links-anchor{
-    text-decoration: none !important;
-    cursor: pointer;
-}
+
 
 .umlibrary-favorite-links-action-completed {
     color: #00a0d2;
@@ -205,10 +368,7 @@
     display: none;
 }
 
-favorite-links-options-menu
-.umlibrarysurvey-favorites-actions{
-    cursor: pointer;
-}
+
 
 
 
@@ -221,91 +381,13 @@ favorite-links-options-menu
     font-weight: bold;
 }
 
-#favoriteLinksSearchBar {
-    font-size: 16px;
-    padding: 12px 80px;
-    border: 1px solid #ddd;
-    margin-bottom: 12px;
-    box-sizing : border-box;
-}
+
 
 
 
 
 /*----------------------------------------------------------------------------*/
-/* mega menu list */
-.fl-nav-menu {
-    display: block;
-    position: relative;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    z-index: 15;
-}
 
-/* a top level navigation item in the mega menu */
-.fl-nav-item {
-    list-style: none;
-    display: inline-block;
-    padding: 0;
-    margin: 0;
-}
-
-/* first descendant link within a top level navigation item */
-.fl-nav-item > a {
-    position: relative;
-    display: inline-block;
-    padding: 0.5em 1em;
-    margin: 0 0 -1px 0;
-    border: 1px solid transparent;
-}
-
-/* focus/open states of first descendant link within a top level
-   navigation item */
-.fl-nav-item > a:focus,
-.fl-nav-item > a.open {
-    border: 1px solid #dedede;
-}
-
-/* open state of first descendant link within a top level
-   navigation item */
-.fl-nav-item > a.open {
-    background-color: #fff;
-    border-bottom: none;
-    z-index: 1;
-}
-
-/* sub-navigation panel */
-.fl-sub-nav {
-    position: absolute;
-    display: none;
-    top: 2.6em;
-    margin-top: -1px;
-    padding: 0.5em 1em;
-    border: 1px solid #dedede;
-    background-color: #fff;
-}
-
-/* sub-navigation panel open state */
-.fl-sub-nav.open {
-    display: block;
-}
-
-/* list of items within sub-navigation panel */
-.fl-sub-nav ul {
-    display: inline-block;
-    vertical-align: top;
-    margin: 0 1em 0 0;
-    padding: 0;
-}
-
-/* list item within sub-navigation panel */
-.fl-sub-nav li {
-    display: block;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
 
 /* //////////////////
 //  Media Queries 

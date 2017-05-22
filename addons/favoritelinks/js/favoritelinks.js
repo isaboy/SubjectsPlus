@@ -110,10 +110,20 @@ function favoriteDatabasesList() {
 
             var divList = document.createElement("div");
             divList.id = "favorite-links-modal-window-content-list";
-
-            
-
             leftDiv.appendChild(divList);
+
+            var divOptionsMenu = document.createElement('nav');
+            divOptionsMenu.id = 'favorite-links-options-menu';
+
+            var ul = document.createElement('ul');
+            ul.className = 'fl-nav-menu';
+
+            umlibrary_favorite_links.createSaveLinksDropDownMenu(ul);
+            umlibrary_favorite_links.createLoadLinksDropDownMenu(ul);
+
+            divOptionsMenu.appendChild(ul);
+
+            leftDiv.appendChild(divOptionsMenu);
 
         },
         createSearchBar: function (container) {
@@ -153,24 +163,14 @@ function favoriteDatabasesList() {
             favoriteListInput.setAttribute('id', 'favoritesListInput');
             favoriteListInput.setAttribute('type', 'file');
 
-            var divOptionsMenu = document.createElement('nav');
-            divOptionsMenu.id = 'favorite-links-options-menu';
+           
 
-            var ul = document.createElement('ul');
-            ul.className = 'fl-nav-menu';
-
-            umlibrary_favorite_links.createSaveLinksDropDownMenu(ul);
-            umlibrary_favorite_links.createLoadLinksDropDownMenu(ul);
-
-            divOptionsMenu.appendChild(ul);
-
-            container.appendChild(divOptionsMenu);
             container.appendChild(umlibrary_favorite_links.generateModalCloseButton($(container).parent().parent(), "favorite-links-modal-close-button"));
             container.appendChild(favoriteListInput);
         },
         createSaveLinksDropDownMenu: function (ul) {
             var saveLinksNavItem = document.createElement('li');
-            saveLinksNavItem.className = 'fl-nav-item';
+            saveLinksNavItem.className = 'fl-nav-item backup-list';
 
             var saveLinksAnchor = document.createElement('a');
             saveLinksAnchor.href='';
@@ -221,7 +221,7 @@ function favoriteDatabasesList() {
         },
         createLoadLinksDropDownMenu: function (ul) {
             var loadLinksNavItem = document.createElement('li');
-            loadLinksNavItem.className = 'fl-nav-item';
+            loadLinksNavItem.className = 'fl-nav-item import-list';
 
             var loadLinksAnchor = document.createElement('a');
             loadLinksAnchor.href='';
@@ -418,7 +418,7 @@ function favoriteDatabasesList() {
                         linkName = document.getElementsByTagName("title")[0].innerHTML;
                         urlLink = document.URL;
                         if (!deleting) {
-                            umlibrary_favorite_links.saveFavoritesToLocalStorage(linkName, urlLink, 'Pages', true);
+                            umlibrary_favorite_links.saveFavoritesToLocalStorage(linkName, urlLink, 'Page', true);
                         }
                     }
 
@@ -829,7 +829,7 @@ function favoriteDatabasesList() {
                 if (favorites.length > 0) {
                     var fieldset = document.createElement('fieldset');
                     fieldset.className = "umlibrary-favorite-links-filterby-fieldset";                    
-                    var legend = document.createElement('legend').appendChild(document.createTextNode('Filter by:'));
+                    var legend = document.createElement('legend').appendChild(document.createTextNode('Show:'));
                     fieldset.appendChild(legend);
 
                     var list = document.createElement('ul');
@@ -863,7 +863,7 @@ function favoriteDatabasesList() {
                         a.className = "umlibrary-favorite-links-anchor";
 
                         var remove = document.createElement('button');
-                        remove.className = "fa fa-minus-circle";
+                        remove.className = "fa fa-trash";
 
                         $(remove).click(function (event) {
                             umlibrary_favorite_links.removeFavoriteFromList($(this).parent());
