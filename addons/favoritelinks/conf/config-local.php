@@ -39,10 +39,6 @@ switch($referer) {
         define('SITE_TYPE', 'wp');
         break;
 
-//    case 'library.mssssssiami.edu':
-//        define('SITE_URL', 'http://sp4.local');
-//        break;
-//
     case '10.179.1.174':
         define('SITE_URL', 'http://10.179.1.174/um-library-website');
         define('CONF_PATH', '/var/www/sp4.local/public/addons/favoritelinks/conf/json/');
