@@ -107,11 +107,6 @@ function favoriteDatabasesList() {
 
             modalHeaderTitle.appendChild(document.createTextNode('My Favorite Links'));
             modalHeaderBar.appendChild(modalHeaderTitle);
-
-
-
-
-
             modalContent.appendChild(modalHeaderBar);
 
             modalHeaderBar.appendChild(umlibrary_favorite_links.generateModalCloseButton($(modalHeaderBar).parent().parent(), "favorite-links-modal-close-button"));
@@ -793,6 +788,7 @@ function favoriteDatabasesList() {
                 close.setAttribute("id", id);
             }
             close.className = "favorite-links-modal-window-close-button";
+            close.setAttribute("title", "Close");
 
             $(close).click(function (event) {
                 $(window).off('scroll mousewheel touchmove keydown');

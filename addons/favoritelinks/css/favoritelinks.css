@@ -80,7 +80,7 @@
 .umlibrary-favorite-links-filterby-fieldset {
     border: none;
     font-size: 14px;
-    margin: 15px 0;
+    margin: 15px 0 20px 0;
     padding: 0;
     font-weight: bold;
 }
@@ -102,7 +102,7 @@
 
 #searchBarContainer {
     display: inline-block;
-    margin: 15px 0;
+    margin: 15px 0 0 0;
     width: 100%;
 }
 
@@ -150,7 +150,7 @@
 
 #favorite-links-options-menu {
     display: block;
-    margin: 15px -16px -16px -16px;
+    margin: 10px -16px -16px -16px;
 }
 
 
@@ -202,10 +202,12 @@
     position: absolute;
     display: none;
     bottom: 100%;
-    padding: 1em;
+    padding: 10px 15px;
     background-color: #FFF;
     text-align: left;
-    width: 85%;
+    width: -moz-calc(100% - 32px);
+    width: -webkit-calc(100% - 32px);
+    width: calc(100% - 32px);
     left: 0;
     border: 1px solid #CCC;
 }
@@ -286,6 +288,10 @@
     border-bottom: 1px solid #e0e0e0;
     color: #333333;
     letter-spacing: 1px;
+    margin: 2em 0;
+}
+
+.quick-links-modal-window-column h3:first-of-type {
     margin: 1em 0;
 }
 
@@ -465,20 +471,24 @@
 
     #favorite-links-modal-window-content { height: 230px; }
 
+    .umlibrary-favorite-links-filter-tag {
+        display: inline-block;
+        margin: 0 0 0 8px;
+    }
+
 }
 
 /* ≥ 568px  .pure-u-sm-* */
 @media screen and (min-width: 35.5em) {
 
     #favorite-links-modal-window-content { height: 650px; }
-
 }
 
 
 /* ≥ 768px  .pure-u-md-* */
 @media screen and (min-width: 48em) { 
 
-    #favorite-links-modal-window { padding-top: 70px; background-color: rgba(0,0,0,0.4); }
+    #favorite-links-modal-window { padding-top: 80px; background-color: rgba(0,0,0,0.4); }
 
     #quick-links-modal-window-left-div {
         width: -moz-calc(48% - 30px);
@@ -495,24 +505,64 @@
         width: calc(50% - 30px);
     }
 
+    #quick-links-modal-window-left-div, #quick-links-modal-window-right-div {
+        padding: 15px 15px 0 15px;
+    }
+
     #favorite-links-options-menu {
         bottom: 0;
         display: inline-block;
         left: 0;
-        margin: 0;
+        margin: 10px 0 -30px 0;
         position: absolute;
         width: 100%;
     }
 
-   
+    .quick-links-modal-window-column p:last-of-type {
+        margin-bottom: 0;
+    }
+
+    #favoriteLinksModalWindowList {
+        display: inline-block;
+        height: 420px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        width: 100%;
+    } 
+
+    .umlibrary-list-item button {
+        margin: 0 8px 0 5px;
+    }  
+}
+
+/* 800px exact */
+@media screen and (min-width: 800px) { 
+
+    #favorite-links-modal-window-content { height: 475px; }
+
+    #quick-links-modal-window-left-div {min-height: 615px;}
+
+    #favoriteLinksModalWindowList {
+        height: 370px;
+    }
 }
 
 
 /* ≥ 1024px     .pure-u-lg-* */
 @media screen and (min-width: 64em) { 
 
-    #favorite-links-modal-window-content { height: 500px; overflow: hidden;}
+    #favorite-links-modal-window-content { height: 600px; }
 
+    #quick-links-modal-window-left-div {
+        height: -moz-calc(100% - 95px);
+        height: -webkit-calc(100% - 95px);        
+        height: calc(100% - 95px);
+        min-height: 10px;
+    }
+
+    #favoriteLinksModalWindowList {
+        height: 340px;
+    }
 }
 
 
@@ -520,9 +570,17 @@
 /* ≥ 1280px     .pure-u-xl-* */
 @media screen and (min-width: 80em) { 
 
+    #quick-links-modal-window-left-div {
+        width: -moz-calc(33% - 30px);
+        width: -webkit-calc(33% - 30px);
+        width: calc(33% - 30px);
+        
+    }
+
+    #quick-links-modal-window-right-div { 
+        width: -moz-calc(65% - 30px);
+        width: -webkit-calc(65% - 30px);
+        width: calc(65% - 30px);
+    }   
+
 }
-
-
-
-
-
