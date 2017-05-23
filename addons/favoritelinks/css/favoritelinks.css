@@ -36,7 +36,8 @@
 }
 
 #quick-links-modal-window-left-div {
-    background-color: #f6f7fa;
+    background-color: #f2f2f2;
+
 }
 
 
@@ -45,26 +46,32 @@
 
 .modal-header {
     width: 100%;
-    background-color: #4f5b66;
+    background-color: #d3d78e;
+    background-image: url("http://library.miami.edu/wp-content/themes/umiami/images/h1_bg_green.png");
+    background-repeat: repeat-x;
     display: block;
 }
 
 .modal-header h2 {
     border: none;
-    color: #FFF;
+    color: #333;
     font-size: 18px;
     letter-spacing: 0;
     margin: 0;
     padding: 15px 10px;
     display: inline-block;
+    font-family: Helvetica,Arial,sans-serif;
+    text-shadow: 0 1px 3px #efefef;
+
 }
 
 .modal-header h2 i {
     margin: 0 4px 0 0;
+    text-shadow: none;
 }
 
 .favorite-links-modal-window-close-button {
-    color: #FFF;
+    color: #333;
     float: right;
     font-size: 24px;
     display: inline-block;
@@ -110,10 +117,13 @@
     font-size: 1.15em;
     font-style: italic;
     padding: 12px;
-    border: 1px solid #CCC;
-    width: 80%;
+    width: 100%;
     text-align: center;
     color: #333333;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px #dddddd inset;
+    box-sizing: border-box;
 }
 
 
@@ -146,11 +156,15 @@
     color: #999;
 }
 
+.umlibrary-list-item button:hover {
+    color: #CC6666;
+}
+
 /*-- Back Up/ Import Buttons --*/
 
 #favorite-links-options-menu {
     display: block;
-    margin: 10px -16px -16px -16px;
+    margin: 10px -16px -20px -16px;
 }
 
 
@@ -169,7 +183,7 @@
     list-style: none;
     display: inline-block;
     padding: 0;
-    margin: 0;
+    margin: 0 !important;
     text-align: center;
     width: 50%;
 }
@@ -188,7 +202,6 @@
 .fl-nav-item > a:focus,
 .fl-nav-item > a.open {
     border: none;
-    outline: none;
 }
 
 /* open state of first descendant link within a top level
@@ -254,7 +267,7 @@
 }
 
 .backup-list {
-    background-color: #a7adb9;
+    background-color: #999;
 }
 
 .backup-list > a {
@@ -262,11 +275,11 @@
 }
 
 .import-list {
-    background-color: #c0c5ce;
+    background-color: #d5d5d5;
 }
 
 .import-list > a {
-    color: #65737d;
+    color: #333;
 }
 
 
@@ -302,6 +315,11 @@
 
 .quick-links-modal-window-column ul {
     list-style: inside;
+}
+
+.quick-links-modal-window-column ul li{
+    font-size: 14px;
+    margin-bottom: 5px;
 }
 
 .quick-links-modal-window-column ul li i {
@@ -513,7 +531,7 @@
         bottom: 0;
         display: inline-block;
         left: 0;
-        margin: 10px 0 -30px 0;
+        margin: 0 0 -30px 0;
         position: absolute;
         width: 100%;
     }
