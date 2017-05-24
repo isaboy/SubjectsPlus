@@ -72,7 +72,7 @@ function favoriteDatabasesList() {
 
             var myFavoriteLibraryLinks = document.createElement('a');
             myFavoriteLibraryLinks.setAttribute('id', 'umlibrary_favorite_links_button');
-            myFavoriteLibraryLinks.text = 'Quick Links';
+            myFavoriteLibraryLinks.text = 'My Favorite Links';
             li.appendChild(myFavoriteLibraryLinks);
 
             accountsMenuUl.appendChild(favoriteListInput);
@@ -658,7 +658,7 @@ function favoriteDatabasesList() {
                         break;
                     }
                 } else {
-                    alert('Sorry, there is not any saved Quick Links file');
+                    alert('Sorry, there is no saved Favorite Links file');
                 }
             });
         },
