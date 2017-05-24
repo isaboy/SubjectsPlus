@@ -46,22 +46,19 @@
 
 .modal-header {
     width: 100%;
-    background-color: #d3d78e;
-    background-image: url("http://library.miami.edu/wp-content/themes/umiami/images/h1_bg_green.png");
-    background-repeat: repeat-x;
+    background-color: #333;
     display: block;
 }
 
 .modal-header h2 {
     border: none;
-    color: #333;
+    color: #FFF;
     font-size: 18px;
     letter-spacing: 0;
     margin: 0;
     padding: 15px 10px;
     display: inline-block;
     font-family: Helvetica,Arial,sans-serif;
-    text-shadow: 0 1px 3px #efefef;
 
 }
 
@@ -71,7 +68,7 @@
 }
 
 .favorite-links-modal-window-close-button {
-    color: #333;
+    color: #FFF;
     float: right;
     font-size: 24px;
     display: inline-block;
@@ -351,7 +348,7 @@
 }
 
 
-/*-- Icon on page --*/
+/*-- Icon on SP pages --*/
 
 .umlibrary-favorite-button{
     background-color: rgba(0, 0, 0, 0);
@@ -364,6 +361,17 @@
     margin-right: 10px;
     margin-top: -35px;
 }
+
+/*-- Icon on SP database list --*/
+
+.favorite_button {float: right;}
+
+.favorite_button button {
+    background-color: rgba(0, 0, 0, 0);
+    border: 0 none;
+    margin: 0 5px 0 0;
+}
+
 
 
 /*----------------------------------------------------------------------------*/

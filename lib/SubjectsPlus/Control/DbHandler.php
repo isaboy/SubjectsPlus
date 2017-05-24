@@ -434,7 +434,7 @@ ORDER BY newtitle
 
         global $favorite_links_enabled;
         if ($favorite_links_enabled) { //TODO
-            $onerow = $onerow . " <div class=\"favorite_button\">".self::generateFavoriteButton()."</div>";
+            $onerow = $onerow . " </td><td><div class=\"favorite_button\">".self::generateFavoriteButton()."</div>";
         }
 
        $onerow = $onerow ."</td></tr>";
