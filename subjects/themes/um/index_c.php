@@ -98,7 +98,20 @@ $newlist = "<ul>\n";
 $newlist .= "</ul>\n";
 
 // Add header now, because we need a value ($v2styles) from it
-include("includes/header_um.php");
+$environment = getenv('HTTP_HOST');
+
+switch ($environment) {
+    case 'development.library.miami.edu':
+        if (file_exists("includes/header_um-dev.php")) {
+            include("includes/header_um-dev.php");
+        }
+        break;
+    default:
+        if (file_exists("includes/header_um.php")) {
+            include("includes/header_um.php");
+        }
+        break;
+}
 
 
 // put together our main result display
