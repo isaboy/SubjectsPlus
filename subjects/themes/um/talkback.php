@@ -489,7 +489,20 @@ if (isset($_POST['skill']) and $_POST['skill'] != $stk_answer) {
 }
 
 
-include("includes/header_um.php");
+$environment = getenv('HTTP_HOST');
+
+switch ($environment) {
+    case 'development.library.miami.edu':
+        if (file_exists("includes/header_um-dev.php")) {
+            include("includes/header_um-dev.php");
+        }
+        break;
+    default:
+        if (file_exists("includes/header_um.php")) {
+            include("includes/header_um.php");
+        }
+        break;
+}
 
 ?>
 

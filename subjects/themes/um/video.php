@@ -151,7 +151,20 @@ if ($num_rows) {
 // Now we are finally read to display the page
 ////////////////////////////
 
-include("includes/header_um.php");
+$environment = getenv('HTTP_HOST');
+
+switch ($environment) {
+    case 'development.library.miami.edu':
+        if (file_exists("includes/header_um-dev.php")) {
+            include("includes/header_um-dev.php");
+        }
+        break;
+    default:
+        if (file_exists("includes/header_um.php")) {
+            include("includes/header_um.php");
+        }
+        break;
+}
 ?>
 
 <div class="panel-container">

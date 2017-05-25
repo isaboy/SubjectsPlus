@@ -159,12 +159,27 @@ $page_title = $subject_name;
 
 // Do we have an alternate header?
 if (isset ($header_type) && $header_type != 'default') {
-    if( file_exists("includes/header_$header_type.php") )
-    {
-        include("includes/header_$header_type.php");
+    include("includes/set_header.php");
+
+    $environment = getenv('HTTP_HOST');
+    $default_header = true;
+
+    switch ($environment) {
+        case 'development.library.miami.edu':
+            if (file_exists("includes/header_$header_type-dev.php")) {
+                include("includes/header_$header_type-dev.php");
+                $default_header = false;
+            }
+            break;
+        default:
+            if (file_exists("includes/header_$header_type.php")) {
+                include("includes/header_$header_type.php");
+                $default_header = false;
+            }
+            break;
     }
-    else
-    {
+
+    if ($default_header){
         include("includes/header.php");
     }
 } else {

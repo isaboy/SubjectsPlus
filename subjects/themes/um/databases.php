@@ -172,7 +172,22 @@ if ($show_subjects == TRUE) {
 // Assemble the content for our main pluslet/box
 $display = $intro . $out;
 
-include("includes/header_um.php");
+include("../../../includes/set_header.php");
+
+$environment = getenv('HTTP_HOST');
+
+switch ($environment) {
+    case 'development.library.miami.edu':
+        if (file_exists("includes/header_um-dev.php")) {
+            include("includes/header_um-dev.php");
+        }
+        break;
+    default:
+        if (file_exists("includes/header_um.php")) {
+            include("includes/header_um.php");
+        }
+        break;
+}
 
 // Our version 2 vs version 3 styles choice
 

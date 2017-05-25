@@ -140,7 +140,20 @@ if (isset($_REQUEST['searchterm']) && $_REQUEST['searchterm'] && $_REQUEST['sear
     $page_title = "Library FAQs";
 }
 
-include("includes/header_um.php");
+$environment = getenv('HTTP_HOST');
+
+switch ($environment) {
+    case 'development.library.miami.edu':
+        if (file_exists("includes/header_um-dev.php")) {
+            include("includes/header_um-dev.php");
+        }
+        break;
+    default:
+        if (file_exists("includes/header_um.php")) {
+            include("includes/header_um.php");
+        }
+        break;
+}
 
 if ($displaytype == "search") {
 
