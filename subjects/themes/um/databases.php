@@ -172,8 +172,6 @@ if ($show_subjects == TRUE) {
 // Assemble the content for our main pluslet/box
 $display = $intro . $out;
 
-include("../../../includes/set_header.php");
-
 $environment = getenv('HTTP_HOST');
 
 switch ($environment) {

@@ -27,6 +27,7 @@ if(isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != ""){
 
 */
 
+include("includes/set_header.php");
 
 
 

@@ -19,6 +19,11 @@ switch($environment) {
         define("THEME_FOLDER", "//dev-www.library.miami.edu/themes/");
         define("THEME_BASE_DIR", "//dev-www.library.miami.edu/wp-content/themes/umiami/");
         break;
+    case 'sp4.local':
+        define("PATH_FROM_ROOT", "//dev-www.library.miami.edu");
+        define("THEME_FOLDER", "//dev-www.library.miami.edu/themes/");
+        define("THEME_BASE_DIR", "//dev-www.library.miami.edu/wp-content/themes/umiami/");
+        break;
     default:
         define("PATH_FROM_ROOT", "//library.miami.edu");
         define("THEME_FOLDER", "//library.miami.edu/themes/");

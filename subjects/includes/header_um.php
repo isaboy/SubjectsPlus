@@ -28,14 +28,7 @@ if(isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] != ""){
 */
 
 
-if ($_SERVER['HTTP_HOST'] != "localhost") {
-    define("PATH_FROM_ROOT", "//library.miami.edu");
-    define("THEME_FOLDER", "//library.miami.edu/wp-content/themes/");
-    define("THEME_BASE_DIR", "//library.miami.edu/wp-content/themes/umiami/");
-} else {
-    define("PATH_FROM_ROOT", "/richter");
-    define("THEME_BASE_DIR", "http://localhost/richter/wp-content/themes/umiami/");
-}
+include("includes/set_header.php");
 
 // Load our jQuery libraries + some css
 if (isset($use_jquery)) { print generatejQuery($use_jquery);
