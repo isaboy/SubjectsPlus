@@ -45,7 +45,7 @@ $defaultLinks = file_get_contents($conf_folder_path . 'defaultLinks.json');
     var acceptFrom = '<?php echo $acceptFrom?>';
     var defaultLinks = <?php echo $defaultLinks?>;
 
-    if (insideIFrame && refererJS.includes(origin)){ //Is an sp site inside an iFrame in Wordpress, let's fix it
+    if (insideIFrame && refererJS.indexOf(origin) >= 0){ //Is an sp site inside an iFrame in Wordpress, let's fix it
         var environment = '<?php echo $environment ?>';
         var sitesConfJson = <?php echo json_encode($sitesConfJson) ?>;
 

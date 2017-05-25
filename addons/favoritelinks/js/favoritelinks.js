@@ -103,7 +103,7 @@ function favoriteDatabasesList() {
 
             var starClosed = document.createElement('i');
             starClosed.setAttribute("class", "fa fa-star");
-            modalHeaderTitle.append(starClosed);
+            modalHeaderTitle.appendChild(starClosed);
 
             modalHeaderTitle.appendChild(document.createTextNode('My Favorite Links'));
             modalHeaderBar.appendChild(modalHeaderTitle);
@@ -150,7 +150,7 @@ function favoriteDatabasesList() {
             var searchBarDiv = document.createElement('div');
             searchBarDiv.id = 'searchBarContainer';
             searchBarDiv.appendChild(searchBar);
-            container.append(searchBarDiv);       
+            container.appendChild(searchBarDiv);
 
             if (!$.isEmptyObject(localStorage.umLibraryFavorites)) {
                 var favorites = JSON.parse(localStorage.umLibraryFavorites);
@@ -378,7 +378,7 @@ function favoriteDatabasesList() {
                 });
 
                 $(".favorite-database-icon").each(function () {
-                    var anchor = $(this).parent().parent().find("a")[0];
+                    var anchor = $(this).parent().parent().parent().find("a")[0];
                     var linkName = $(anchor).text();
                     var urlLink = $(anchor).attr('href');
 
@@ -418,7 +418,7 @@ function favoriteDatabasesList() {
                     }
 
                     if ($(this).hasClass("favorite-database-icon")) {
-                        var anchor = $(this).parent().parent().find("a")[0];
+                        var anchor = $(this).parent().parent().parent().find("a")[0];
 
                         linkName = $(anchor).text();
                         urlLink = $(anchor).attr('href');
@@ -448,7 +448,7 @@ function favoriteDatabasesList() {
             $(button).addClass("fa-star-o");
         },
         saveFavoritesToLocalStorage: function (linkName, urlLink, tag, propagate) {
-            if (linkName.includes("|")){
+            if (linkName.indexOf("|") >= 0){
                 linkName = linkName.split("|")[0];
             }
 
@@ -747,14 +747,14 @@ function favoriteDatabasesList() {
             
             var starOpen = document.createElement('i');
             starOpen.setAttribute("class", "fa fa-star-o");
-            instructionsItem1.append(starOpen);
+            instructionsItem1.appendChild(starOpen);
 
             var instructionsItem2 = document.createElement('li');
             instructionsItem2.appendChild(document.createTextNode("Your favorite links will display the colored star icon"));
 
             var starClosed = document.createElement('i');
             starClosed.setAttribute("class", "fa fa-star");
-            instructionsItem2.append(starClosed);
+            instructionsItem2.appendChild(starClosed);
 
 
             var instructionsItem3 = document.createElement('li');
@@ -884,11 +884,11 @@ function favoriteDatabasesList() {
 
                         var favIcon = document.createElement('img');
                         var scrubbedURL = urlLink;
-                        if (scrubbedURL.includes("http://access.library.miami.edu/login?url=")){
+                        if (scrubbedURL.indexOf("http://access.library.miami.edu/login?url=") >= 0){
                             var scrubbedURL =scrubbedURL.split("http://access.library.miami.edu/login?url=", 2)[1];
                         }
 
-                        if (scrubbedURL.includes("?")){
+                        if (scrubbedURL.indexOf("?") >= 0){
                             var scrubbedURL =scrubbedURL.split("?", 2)[0];
                         }
                         favIcon.src = "https://www.google.com/s2/favicons?domain_url=" + scrubbedURL;
