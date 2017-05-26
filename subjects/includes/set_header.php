@@ -8,25 +8,21 @@
 
 $environment = getenv('HTTP_HOST');
 
+global $PATH_FROM_ROOT;
+global $THEME_FOLDER;
+global $THEME_BASE_DIR;
+
 switch($environment) {
-    case 'localhost':
-        define("PATH_FROM_ROOT", "//library.miami.edu");
-        define("THEME_FOLDER", "//library.miami.edu/wp-content/themes/");
-        define("THEME_BASE_DIR", "//library.miami.edu/wp-content/themes/umiami/");
-        break;
     case 'development.library.miami.edu':
-        define("PATH_FROM_ROOT", "//dev-www.library.miami.edu");
-        define("THEME_FOLDER", "//dev-www.library.miami.edu/themes/");
-        define("THEME_BASE_DIR", "//dev-www.library.miami.edu/wp-content/themes/umiami/");
-        break;
     case 'sp4.local':
-        define("PATH_FROM_ROOT", "//dev-www.library.miami.edu");
-        define("THEME_FOLDER", "//dev-www.library.miami.edu/themes/");
-        define("THEME_BASE_DIR", "//dev-www.library.miami.edu/wp-content/themes/umiami/");
+        $PATH_FROM_ROOT = "//dev-www.library.miami.edu";
+        $THEME_FOLDER = "//dev-www.library.miami.edu/themes/";
+        $THEME_BASE_DIR = "//dev-www.library.miami.edu/wp-content/themes/umiami/";
         break;
+    case 'localhost':
     default:
-        define("PATH_FROM_ROOT", "//library.miami.edu");
-        define("THEME_FOLDER", "//library.miami.edu/themes/");
-        define("THEME_BASE_DIR", "//library.miami.edu/wp-content/themes/umiami/");
+        $PATH_FROM_ROOT = "//library.miami.edu";
+        $THEME_FOLDER = "//library.miami.edu/themes/";
+        $THEME_BASE_DIR = "//library.miami.edu/wp-content/themes/umiami/";
         break;
 }
