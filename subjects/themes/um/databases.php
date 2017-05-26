@@ -282,6 +282,8 @@ $legend = "<p>\n<img src=\"$IconPath/v2-lock.png\" border=\"0\" alt=\"Restricted
 <img src=\"$IconPath/camera.gif\" width=\"16\" height=\"16\" border=\"0\" alt=\"Resource includes images\"> = " . _("Images") . "<br />\n
 <img src=\"$IconPath/television.gif\" width=\"16\" height=\"16\" border=\"0\" alt=\"Resource includes video\"> = " . _("Video files") . "<br />\n
 <img src=\"$IconPath/sound.gif\" width=\"16\" height=\"16\" border=\"0\" alt=\"Resource includes audio\"> = " . _("Audio files") . "<br />\n
+<i class=\"fa fa-star-o\" width=\"16\" height=\"16\" border=\"0\" alt=\"Add to favorite links list\"></i> = " . _("Add to Favorite Links List") . "<br />\n
+<i class=\"fa fa-star\" width=\"16\" height=\"16\" border=\"0\" alt=\"Marked as favorite link\"></i> = " . _("Marked as Favorite Link") . "<br />\n
 </p>\n";
 
 ////////////////////////////
