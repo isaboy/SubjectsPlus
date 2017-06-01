@@ -302,6 +302,7 @@ $legend = "<p>\n<img src=\"$IconPath/v2-lock.png\" border=\"0\" alt=\"Restricted
                 print $db_results;
                 global $favorite_links_enabled;
                 if ($favorite_links_enabled):?>
+                    <button class="fa fa-star-o fa-3 umlibrary-favorite-button"></button>
                     <script>
                         fdl.setFavorites();
                     </script>

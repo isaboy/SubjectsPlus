@@ -154,6 +154,11 @@ switch ($environment) {
             include("includes/header_um-dev.php");
         }
         break;
+    case 'sp4.local':
+        if (file_exists("includes/header_um-dev.php")) {
+            include("includes/header_um-dev.php");
+        }
+        break;
     default:
         if (file_exists("includes/header_um.php")) {
             include("includes/header_um.php");

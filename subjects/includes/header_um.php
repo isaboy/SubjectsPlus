@@ -431,25 +431,33 @@ if( (isset($google_analytics_ua)) && (( !empty($google_analytics_ua))) ) {
                 </li>
 
                 <!--ACCOUNTS-->
-                <li class="login mega last-child" rel="accounts"><a href="http://library.miami.edu/patron/" class="nav_highlight">Accounts+</a>
-                <!-- begin accounts mega menu -->
+              <li class="login mega last-child" rel="accounts"><a href="http://library.miami.edu/patron/"
+                                                                  class="nav_highlight">Accounts+</a>
+                  <!-- begin accounts mega menu -->
                   <div class="mega_child mega-sm mega-right-special2">
                       <div class="mega_intro"><span style="width: 155px;display: inline-block;">Accounts</span>
-                        <span style="display: inline-block; width: 160px;">Information for</span>
+                          <span style="display: inline-block; width: 160px;">Information for</span>
                       </div>
                       <ul>
-                        <li><a href="http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/login.do?loginFn=signin&vid=uml&targetURL=http:%2F%2Fmiami-primo.hosted.exlibrisgroup.com%2Fprimo_library%2Flibweb%2Faction%2Fsearch.do%3Fvid%3Duml%26amp;dscnt%3D0%26amp;afterTimeout%3DE08029BDF7C2992FC31D8ACB97398E2E%26amp;dstmp%3D1463604331494%26amp;initializeIndex%3Dtrue&isMobile=false">MyLibrary</a></li>                        
-                        <li><a href="https://www.courses.miami.edu/webapps/login/">Blackboard</a></li>
-                        <li><a href="https://triton.library.miami.edu/">ILLiad (Interlibrary Loan)</a></li>
-                        <li><a href="https://aeon.library.miami.edu/aeon/">Aeon</a></li>
-                        <li class="last"><a href="https://myum.miami.edu/">MyUM</a></li>
+                          <li>
+                              <a href="http://miami-primo.hosted.exlibrisgroup.com/primo_library/libweb/action/login.do?loginFn=signin&vid=uml&targetURL=http:%2F%2Fmiami-primo.hosted.exlibrisgroup.com%2Fprimo_library%2Flibweb%2Faction%2Fsearch.do%3Fvid%3Duml%26amp;dscnt%3D0%26amp;afterTimeout%3DE08029BDF7C2992FC31D8ACB97398E2E%26amp;dstmp%3D1463604331494%26amp;initializeIndex%3Dtrue&isMobile=false">MyLibrary</a>
+                          </li>
+                          <li><a href="https://www.courses.miami.edu/webapps/login/">Blackboard</a></li>
+                          <li><a href="https://triton.library.miami.edu/">ILLiad (Interlibrary Loan)</a></li>
+                          <li><a href="https://aeon.library.miami.edu/aeon/">Aeon</a></li>
+                          <li class="last"><a href="https://myum.miami.edu/">MyUM</a></li>
+                          <?php
+                          global $favorite_links_enabled;
+                          if ($favorite_links_enabled):?>
+                              <li id="favorite-links-menu-container"</li>
+                          <?php endif; ?>
                       </ul>
                       <ul>
-                        <li><a href="<?php print PATH_FROM_ROOT; ?>/patron/undergrad/">Undergraduate</a></li>
-                        <li><a href="<?php print PATH_FROM_ROOT; ?>/patron/grad/">Graduate Student</a></li>
-                        <li><a href="<?php print PATH_FROM_ROOT; ?>/patron/faculty/">Faculty</a></li>
-                        <li><a href="<?php print PATH_FROM_ROOT; ?>/patron/alumnus/">Alumnus</a></li>
-                        <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/patron/visitor/">Visitor</a></li>
+                          <li><a href="<?php print PATH_FROM_ROOT; ?>/patron/undergrad/">Undergraduate</a></li>
+                          <li><a href="<?php print PATH_FROM_ROOT; ?>/patron/grad/">Graduate Student</a></li>
+                          <li><a href="<?php print PATH_FROM_ROOT; ?>/patron/faculty/">Faculty</a></li>
+                          <li><a href="<?php print PATH_FROM_ROOT; ?>/patron/alumnus/">Alumnus</a></li>
+                          <li class="last"><a href="<?php print PATH_FROM_ROOT; ?>/patron/visitor/">Visitor</a></li>
                       </ul>
                   </div>
                 <!-- end accounts mega menu -->
@@ -460,21 +468,24 @@ if( (isset($google_analytics_ua)) && (( !empty($google_analytics_ua))) ) {
     </div>
 
 
-
-
     <!-- PAGE HEADER-->
     <div class="pure-g">
         <div class="pure-u-1">
           <h1><?php print $page_title; ?></h1>
           <?php
           global $favorite_links_enabled;
-          if ($favorite_links_enabled) {
-              include('../addons/favoritelinks/index.php'); ?>
+          if ($favorite_links_enabled):?>
               <button class="fa fa-star-o fa-3 umlibrary-favorite-button"></button>
+              <style>
+                  <?php include ('../addons/favoritelinks/css/favoritelinks.css');?>
+              </style>
               <script>
+                  <?php include ('../addons/favoritelinks/js/favoritelinks.js');?>
+                  fdl = new favoriteDatabasesList();
+                  fdl.init();
                   fdl.setFavorites();
               </script>
-          <?php  } ?>
+            <?php endif;?>
         </div>
     </div>
 

@@ -325,10 +325,6 @@ include("includes/footer.php");
           $(".zebra").removeClass("evenrow");
           $(".zebra").removeClass("oddrow");
       }
-
-      <?php include('../assets/js/guides/favoritelinks.js'); ?>
-      var fdl = favoriteDatabasesList();
-      fdl.init();
   })
   ;
 </script>

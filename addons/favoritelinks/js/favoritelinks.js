@@ -1,29 +1,67 @@
+
 function favoriteDatabasesList() {
+    var conf_url = "";
+    var minimumItemsCountForSearchBar = "";
+    var defaultLinks = "";
+    var trusted_urls = "";
+    var isWordpress = "";
+    var isInIFrame = "";
     var previouslyLoggedIn = false;
     var dialogBoxOpened = false;
     var umlibrary_favorite_links = {
         init: function () {
-                if (!umlibrary_favorite_links.isInIFrame()){
+            isWordpress = parseInt(umlibrary_favorite_links.getParamFromUrl('wordpress'));
+            isInIFrame = parseInt(umlibrary_favorite_links.getParamFromUrl('iframe'));
+            umlibrary_favorite_links.setEnvironment();
 
-                    if (thisSite === 'sp'){
-                        umlibrary_favorite_links.includeVendorsJSAndCSS();
+            $.ajax({
+                url: conf_url,
+                type: 'GET',
+                success: function(data){
+                    data = JSON.parse(data);
+                    minimumItemsCountForSearchBar = data.minimumItemsCountForSearchBar;
+                    defaultLinks = data.default_links;
+                    trusted_urls = data.trusted_urls;
+
+                    if (typeof php_vars !== 'undefined') {
+                        isWordpress = parseInt(php_vars.wordpress);
                     }
-                    umlibrary_favorite_links.prepareUI();                    
 
-                    window.onbeforeunload = function(event) {
-                        umlibrary_favorite_links.logOutFromGoogle(false);
-                    };
-                    umlibrary_favorite_links.bindUIActions();
-                    umlibrary_favorite_links.createDefaultListOfLinks();
-                    umlibrary_favorite_links.detectLocalStorageChange();
+                    if (!isInIFrame) {
+                        umlibrary_favorite_links.prepareUI();
+
+                        if (!isWordpress) {
+                            umlibrary_favorite_links.includeVendorsJSAndCSS();
+                        }
+
+                        umlibrary_favorite_links.bindUIActions();
+                        umlibrary_favorite_links.createDefaultListOfLinks();
+                        umlibrary_favorite_links.detectLocalStorageChange();
+
+                        window.onbeforeunload = function (event) {
+                            umlibrary_favorite_links.logOutFromGoogle(false);
+                        };
+                    }
+                    umlibrary_favorite_links.setCommunications();
+                },
+                error: function(data) {
+                    console.log(data);
                 }
-                umlibrary_favorite_links.setCommunications();
+            });
         },
-        isInIFrame: function () {
-            try {
-                return window.self !== window.top;
-            } catch (e) {
-                return true;
+        setEnvironment: function () {
+            var environment = 'local'; //local, development, production
+
+            switch(environment) {
+                case 'local':
+                    conf_url =  '//sp4.local/addons/favoritelinks/conf/json/conf.php';
+                    break;
+                case 'development':
+                    conf_url = '//development.library.miami.edu/fav/addons/favoritelinks/conf/json/conf.php';
+                    break;
+                case 'production':
+                    conf_url =  '//sp.library.miami.edu/addons/favoritelinks/conf/json/conf.php';
+                    break;
             }
         },
         includeVendorsJSAndCSS: function () {
@@ -36,50 +74,36 @@ function favoriteDatabasesList() {
             document.head.appendChild(googleClient);
         },
         prepareUI: function () {
-            umlibrary_favorite_links.showFavoriteAndMenuButtons();
             umlibrary_favorite_links.addFavoriteLinksButtonToAccountsMenu();
 
-            if (thisSite==='wp') {
+            if (isWordpress) {
                 umlibrary_favorite_links.addFavoriteButtonToHeader();
             }
+
             umlibrary_favorite_links.createFavoriteLinksModal();
             umlibrary_favorite_links.setFavorites();
             umlibrary_favorite_links.addLinkToFavorites();
             umlibrary_favorite_links.exportFavoritesList();
             umlibrary_favorite_links.importFavorites();
             umlibrary_favorite_links.favoritesListInput();
-        },        
-        showFavoriteAndMenuButtons: function () {
-            if (thisSite==='sp') {
-                var databasesDiv = document.getElementsByClassName(siteMarkupClasses['favoriteButtonDatabaseListDivClass']);
-                for (var i = 0; i < databasesDiv.length; i++) {
-                    databasesDiv[i].style.visibility = 'visible';
-                }
-            }
         },
         addFavoriteLinksButtonToAccountsMenu: function () {
-            var accountsMenu = document.getElementsByClassName(siteMarkupClasses['favoriteButtonAccountMenuDivClass'])[0];
-            var accountsMenuUl = accountsMenu.getElementsByTagName("ul")[0];
-
-            var divOptions = document.createElement('div');
-            divOptions.className = "mega_more favorite_links_options";
+            var selector = "favorite-links-menu-container";
+            var container = document.getElementById(selector);
 
             var favoriteListInput = document.createElement('input');
             favoriteListInput.setAttribute('id', 'favoritesListInput');
             favoriteListInput.setAttribute('type', 'file');
 
-            var li = document.createElement('li');
-
             var myFavoriteLibraryLinks = document.createElement('a');
             myFavoriteLibraryLinks.setAttribute('id', 'umlibrary_favorite_links_button');
             myFavoriteLibraryLinks.text = 'My Favorite Links';
-            li.appendChild(myFavoriteLibraryLinks);
 
-            accountsMenuUl.appendChild(favoriteListInput);
-            accountsMenuUl.appendChild(li);
+            container.appendChild(favoriteListInput);
+            container.appendChild(myFavoriteLibraryLinks);
         },
         addFavoriteButtonToHeader: function () {
-            var header = document.getElementsByClassName(siteMarkupClasses['headerClass'])[0];
+            var header = document.getElementsByClassName("page-header")[0];
             if (header) {
                 var button = document.createElement('button');
                 button.className = "fa fa-star-o fa-3 umlibrary-favorite-button";
@@ -305,6 +329,16 @@ function favoriteDatabasesList() {
             umlibrary_favorite_links.enableAccessibiliyHandler();
         },
         enableAccessibiliyHandler: function (){
+            var url = "//adobe-accessibility.github.io/Accessible-Mega-Menu/js/jquery-accessibleMegaMenu.js";
+            if (!isWordpress){
+                $.getScript( url, function() {
+                    umlibrary_favorite_links.setAccessibilitySettings();
+                });
+            }else{
+                umlibrary_favorite_links.setAccessibilitySettings();
+            }
+        },
+        setAccessibilitySettings: function () {
             $("#favorite-links-options-menu:first").accessibleMegaMenu({
                 /* prefix for generated unique id attributes, which are required
                  to indicate aria-owns, aria-controls and aria-labelledby */
@@ -360,7 +394,6 @@ function favoriteDatabasesList() {
                 var len = favorites.length;
 
                 $(".umlibrary-favorite-button").each(function () {
-                    var linkName = document.getElementsByTagName("title")[0].innerHTML;
                     var urlLink = document.URL;
 
                     if (len == 0){
@@ -379,7 +412,6 @@ function favoriteDatabasesList() {
 
                 $(".favorite-database-icon").each(function () {
                     var anchor = $(this).parent().parent().parent().find("a")[0];
-                    var linkName = $(anchor).text();
                     var urlLink = $(anchor).attr('href');
 
                     if (len == 0){
@@ -652,11 +684,8 @@ function favoriteDatabasesList() {
             request.execute(function (resp) {
                 var files = resp.files;
                 if (files && files.length > 0) {
-                    for (var i = 0; i < files.length; i++) {
-                        var file = files[i];
-                        umlibrary_favorite_links.getFileInformationFromGoogleDrive(file.id);
-                        break;
-                    }
+                    var file = files[0];
+                    umlibrary_favorite_links.getFileInformationFromGoogleDrive(file.id);
                 } else {
                     alert('Sorry, there is no saved Favorite Links file');
                 }
@@ -802,7 +831,7 @@ function favoriteDatabasesList() {
             $("#" + currentModal + " :focusable").each(function () {
                 var element = $(this);
                 element.keydown(function (event) {
-                    currentElement = $(this)[0];
+                    var currentElement = $(this)[0];
                     var focusables = $("#" + currentModal + " :focusable");
                     if (focusables.length > 0) {
                         var firstFocusable = focusables[0];
@@ -840,9 +869,17 @@ function favoriteDatabasesList() {
                 var favorites = JSON.parse(localStorage.umLibraryFavorites);
                 if (favorites.length > 0) {
                     var fieldset = document.createElement('fieldset');
-                    fieldset.className = "umlibrary-favorite-links-filterby-fieldset";                    
+                    fieldset.className = "umlibrary-favorite-links-filterby-fieldset";
                     var legend = document.createElement('legend').appendChild(document.createTextNode('Show:'));
                     fieldset.appendChild(legend);
+                    fieldset.style.display = 'none';
+
+                    if (!$.isEmptyObject(localStorage.umLibraryFavorites)) {
+                        favorites = JSON.parse(localStorage.umLibraryFavorites);
+                        if (favorites.length > minimumItemsCountForSearchBar) {
+                            $(fieldset).show();
+                        }
+                    }
 
                     var list = document.createElement('ul');
                     list.id = "favoriteLinksModalWindowList";
@@ -885,11 +922,11 @@ function favoriteDatabasesList() {
                         var favIcon = document.createElement('img');
                         var scrubbedURL = urlLink;
                         if (scrubbedURL.indexOf("http://access.library.miami.edu/login?url=") >= 0){
-                            var scrubbedURL =scrubbedURL.split("http://access.library.miami.edu/login?url=", 2)[1];
+                            scrubbedURL =scrubbedURL.split("http://access.library.miami.edu/login?url=", 2)[1];
                         }
 
                         if (scrubbedURL.indexOf("?") >= 0){
-                            var scrubbedURL =scrubbedURL.split("?", 2)[0];
+                            scrubbedURL =scrubbedURL.split("?", 2)[0];
                         }
                         favIcon.src = "https://www.google.com/s2/favicons?domain_url=" + scrubbedURL;
 
@@ -946,36 +983,63 @@ function favoriteDatabasesList() {
             }
         },
         setCommunications: function () {
-            if (!umlibrary_favorite_links.isInIFrame()) {
+            if (!isInIFrame) {
                 umlibrary_favorite_links.setSendFrame();
             }else{
                 umlibrary_favorite_links.setReceive();
             }
         },
         setSendFrame: function () {
-            var frame = document.createElement('iframe');
-            frame.setAttribute("tabindex", -1);
-            frame.setAttribute('src', sendTo);
-            frame.setAttribute('id', 'sendMessagesFrame');
-            frame.style.display = "none";
-            var body = document.getElementsByTagName('body')[0];
-            body.appendChild(frame);
+            for (var i = 0; i < trusted_urls.length; i = i +1){
+                var url = trusted_urls[i];
+                var urlDomain = umlibrary_favorite_links.getUrlDomain(url);
+                var currentDomain = umlibrary_favorite_links.getUrlDomain(window.location.href);
+                if (urlDomain !== currentDomain){
+                    var frame = document.createElement('iframe');
+                    frame.setAttribute("id", "frame-"+url);
+                    frame.setAttribute("data-url", url);
+                    frame.setAttribute("tabindex", -1);
+                    frame.setAttribute('src', url + '?iframe=1');
+                    frame.setAttribute('class', 'favorite-links-frames');
+                    frame.style.display = "none";
+                    var body = document.getElementsByTagName('body')[0];
+                    body.appendChild(frame);
+                }
+            }
         },
         setReceive: function () {
             window.onmessage = function(e) {
-                if (e.origin !== acceptFrom) {
-                    return;
+                var writeToLocal = false;
+                var originUrl = e.origin;
+                var thisDomain = umlibrary_favorite_links.getUrlDomain(window.location.href);
+                var originUrlDomain = umlibrary_favorite_links.getUrlDomain(originUrl);
+                for (var i = 0; i < trusted_urls.length; i = i +1){
+                    var trustedUrlDomain = umlibrary_favorite_links.getUrlDomain(trusted_urls[i]);
+                    if (trustedUrlDomain === originUrlDomain && originUrlDomain !== thisDomain){
+                        writeToLocal = true;
+                        break;
+                    }
                 }
-                if (umlibrary_favorite_links.isJSONString(e.data)) {
-                    localStorage.umLibraryFavorites = e.data;
+                if (writeToLocal) {
+                    if (umlibrary_favorite_links.isJSONString(e.data)) {
+                        localStorage.umLibraryFavorites = e.data;
+                    }
                 }
             };
-
+        },
+        getUrlDomain: function (url) {
+            var l = document.createElement("a");
+            l.href = url;
+            return l.hostname;
         },
         propagateFavorites: function () {
-            if (!insideIFrame) {
-                var win = document.getElementById('sendMessagesFrame').contentWindow;
-                win.postMessage(localStorage.umLibraryFavorites, "*");
+            if (!isInIFrame) {
+                $(".favorite-links-frames").each(function() {
+                    var id = $(this).attr("id");
+                    var url = $(this).attr("data-url");
+                    var win = document.getElementById(id).contentWindow;
+                    win.postMessage(localStorage.umLibraryFavorites, url);
+                });
             }
         },
         isJSONString: function isJson(data) {
@@ -985,7 +1049,12 @@ function favoriteDatabasesList() {
                 return false;
             }
             return true;
-        }      
+        },
+        getParamFromUrl: function(param) {
+            param = param.replace(/[*+?^$.\[\]{}()|\\\/]/g, "\\$&"); // escape RegEx meta chars
+            var regex = location.search.match(new RegExp("[?&]" + param + "=([^&]+)(&|$)"));
+            return regex && decodeURIComponent(regex[1].replace(/\+/g, " "));
+        }
     };
 
     return umlibrary_favorite_links;

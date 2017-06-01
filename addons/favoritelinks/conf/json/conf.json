@@ -1,60 +1,24 @@
 {
-  "sp": {
-    "sites": [
-      {
-        "origin": "http://development.library.miami.edu",
-        "sendTo": "http://dev-www.library.miami.edu",
-        "acceptFrom": "http://dev-www.library.miami.edu",
-        "environment": "development"
-      },
-      {
-        "origin": "http://sp.library.miami.edu",
-        "sendTo": "http://10.179.1.174/"
-      },
-      {
-        "origin": "http://sp4.local",
-        "sendTo": "http://10.179.1.174/um-library-website",
-        "acceptFrom": "http://10.179.1.174",
-        "environment": "local"
-      },
-      {
-        "origin": "http://localhost/sp4/sp4-favlinks-pv",
-        "sendTo": "http://localhost/richter",
-        "acceptFrom": "http://localhost/richter",
-        "environment": "local"
-      }
-    ],
-    "siteMarkupClasses": {
-      "favoriteButtonAccountMenuDivClass": "mega_child mega-sm mega-right-special2",
-      "favoriteButtonDatabaseListDivClass": "favorite_button",
-      "favoriteButtonIconClass": "favorite-database-icon",
-      "favoriteButtonPageHeaderDivClass": ""
+  "trusted_urls": [
+    "http://sp4domain.local/subjects/index.php",
+    "http://development.library.miami.edu/fav/subjects/index.php",
+    "http://dev-www.library.miami.edu"
+  ],
+  "default_links": [
+    {
+      "linkName": "Research Guides",
+      "urlLink": "http://sp.library.miami.edu/subjects/index.php",
+      "tag": "Pages"
+    },
+    {
+      "linkName": "University of Miami Libraries",
+      "urlLink": "http://library.miami.edu/",
+      "tag": "Pages"
     }
-  },
-  "wp": {
-    "sites": [
-      {
-        "origin": "http://library.miami.edu",
-        "sendTo": "http://10.179.1.174"
-      },
-      {
-        "origin": "http://dev-www.library.miami.edu",
-        "sendTo": "http://development.library.miami.edu/sp4dev-staging-afc/subjects/databases.php",
-        "acceptFrom": "http://development.library.miami.edu",
-        "environment": "development"
-      },
-      {
-        "origin": "http://localhost/richter",
-        "sendTo": "http://localhost/sp4/sp4-favlinks-pv/subjects/databases.php",
-        "acceptFrom": "http://localhost/sp4/sp4-favlinks-pv",
-        "environment": "local"
-      }
-    ],
-    "siteMarkupClasses": {
-      "headerClass": "page-header",
-      "favoriteButtonAccountMenuDivClass": "login mega tour_6",
-      "favoriteButtonIconClass": "favorite-database-icon"
-    }
-  },
-  "minimumItemsCountForSearchBar": 5
+  ],
+  "urls_ice_box":[
+    "http://sp4.local/subjects/index.php",
+    "http://10.179.1.174/um-library-website"
+  ],
+  "minimumItemsCountForSearchBar": 10
 }
