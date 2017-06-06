@@ -92,11 +92,18 @@ function favoriteDatabasesList() {
             var selector = "quicko";
             var container = document.getElementById(selector);
 
+            var div = document.createElement('div');
+
+            var star = document.createElement('i');
+            star.setAttribute('class', 'fa fa-star');
+
             var myFavoriteLibraryLinks = document.createElement('a');
             myFavoriteLibraryLinks.setAttribute('class', 'umlibrary_favorite_links_button fav-links-prompt-home');
             myFavoriteLibraryLinks.text = 'Add your own Favorite Links';
 
-            container.appendChild(myFavoriteLibraryLinks);
+            div.appendChild(star);
+            div.appendChild(myFavoriteLibraryLinks);
+            container.appendChild(div);
         },
         addFavoriteLinksButtonToAccountsMenu: function () {
             var selector = "favorite-links-menu-container";
