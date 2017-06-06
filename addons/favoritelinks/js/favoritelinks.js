@@ -78,6 +78,7 @@ function favoriteDatabasesList() {
 
             if (isWordpress) {
                 umlibrary_favorite_links.addFavoriteButtonToHeader();
+                umlibrary_favorite_links.addFavoriteButtonToMainPage();
             }
 
             umlibrary_favorite_links.createFavoriteLinksModal();
@@ -86,6 +87,16 @@ function favoriteDatabasesList() {
             umlibrary_favorite_links.exportFavoritesList();
             umlibrary_favorite_links.importFavorites();
             umlibrary_favorite_links.favoritesListInput();
+        },
+        addFavoriteButtonToMainPage: function () {
+            var selector = "quicko";
+            var container = document.getElementById(selector);
+
+            var myFavoriteLibraryLinks = document.createElement('a');
+            myFavoriteLibraryLinks.setAttribute('class', 'umlibrary_favorite_links_button fav-links-prompt-home');
+            myFavoriteLibraryLinks.text = 'Add your own Favorite Links';
+
+            container.appendChild(myFavoriteLibraryLinks);
         },
         addFavoriteLinksButtonToAccountsMenu: function () {
             var selector = "favorite-links-menu-container";
@@ -96,7 +107,7 @@ function favoriteDatabasesList() {
             favoriteListInput.setAttribute('type', 'file');
 
             var myFavoriteLibraryLinks = document.createElement('a');
-            myFavoriteLibraryLinks.setAttribute('id', 'umlibrary_favorite_links_button');
+            myFavoriteLibraryLinks.setAttribute('class', 'umlibrary_favorite_links_button');
             myFavoriteLibraryLinks.text = 'My Favorite Links';
 
             container.appendChild(favoriteListInput);
@@ -599,7 +610,7 @@ function favoriteDatabasesList() {
             }
         },
         myFavoriteLinksButtonBehavior: function () {
-            $("#umlibrary_favorite_links_button").click(function (event) {
+            $(".umlibrary_favorite_links_button").click(function (event) {
                 $(window).on({
                     'scroll mousewheel touchmove': function(e) {
                         e.preventDefault();

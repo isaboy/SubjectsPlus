@@ -343,7 +343,7 @@
 
 
 /*-- UM header --*/
-#umlibrary_favorite_links_button{
+.umlibrary_favorite_links_button{
     cursor: pointer;
 }
 
