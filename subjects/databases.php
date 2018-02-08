@@ -162,11 +162,6 @@ if (isset($_POST["searchterm"])) {
 }
 
 $intro .= "<br class=\"clear-both\" />
-<div id='favoriteDatabasesList'>
-<a id='exportFavoriteDatabases' download='myFavoriteDatabasesList'>Save favorite databases list</a>
-<a id='importFavoriteDatabases'>Restore favorite databases list</a>
-<input id=\"favoriteDatabasesListInput\" type=\"file\" style=\"display: none;\" />
-</div>
 <div style=\"float: right; padding: 0 1.5em .5em 0;\"><a id=\"expander\" style=\"cursor: pointer;\">expand all descriptions</a></div>";
 
 // Create our table of databases object
@@ -324,10 +319,6 @@ include("includes/footer.php");
           $(".zebra").removeClass("evenrow");
           $(".zebra").removeClass("oddrow");
       }
-
-      <?php include('../assets/js/guides/favoriteDatabases.js'); ?>
-      var fdl = favoriteDatabasesList();
-      fdl.umlibrary_favorite_links.init();
   })
   ;
 </script>
