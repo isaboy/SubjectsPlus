@@ -243,8 +243,6 @@ print $social_and_search;
 
     $(document).ready(function()
 
-        <?php include('./bb-lti/view.js'); ?>
-
         // .togglebody makes the body of a pluslet show or disappear
         $('body').on('click','.titlebar_text', function(event) {
 
